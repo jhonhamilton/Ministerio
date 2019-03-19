@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Ministerio.View;
+using Ministerio.ViewModel;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -7,11 +9,15 @@ namespace Ministerio
 {
     public partial class App : Application
     {
+        public static NavigationPage Navigator { get; internal set; }
         public App()
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            //MainPage = new MainPage();
+            var mainViewModel = MainViewModel.GetInstance();
+            mainViewModel.InformeView = new InformeViewModel();
+            MainPage = new MasterPage();
         }
 
         protected override void OnStart()

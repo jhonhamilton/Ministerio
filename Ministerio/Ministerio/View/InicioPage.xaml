@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage 
+    x:Class="Ministerio.View.InicioPage"    
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:page="clr-namespace:Ministerio.View">
+    
+    <!--<ContentPage Title="Tab 1" />
+    <ContentPage Title="Tab 2" />
+    <ContentPage Title="Tab 3" />-->
+    <page:InformePage/>
+    <ContentPage Title="Tab 2" />
+    <ContentPage Title="Tab 3" />
+</TabbedPage>

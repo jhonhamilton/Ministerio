@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Ministerio.View.InformePage"
+             xmlns:local="clr-namespace:Ministerio"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="Informe" BackgroundColor="White">
+    <ScrollView BindingContext="{Binding InformeView}">
+        <AbsoluteLayout>
+            <StackLayout BackgroundColor="{Binding FondoAtras}" Opacity="{Binding FondoOpacity}" Padding="5" AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <StackLayout BackgroundColor="{Binding FondoAtras}" Opacity="{Binding FondoOpacity}" Grid.Row="0">
+                        <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Comienzo: " />
+                                <Label Text="{Binding TiempoInicial}" TextColor="Black" />
+                            </StackLayout>
+                        </StackLayout>
+                        <Frame Padding="5" WidthRequest="267" HorizontalOptions="Center" HasShadow="True" OutlineColor="Red" HeightRequest="50">
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                <Image Aspect="AspectFit" Source="{Binding ImagenPlay}"  
+                   IsVisible="{Binding IsOcultar}" WidthRequest="100" >
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding PlayCommand}" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <Image Aspect="AspectFit" Source="{Binding ImagenPause}" WidthRequest="100"
+                   IsVisible="{Binding IsMostrar}">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding PausarCommand}" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <Label WidthRequest="55" Text="{Binding OTiempo}" VerticalOptions="Center" HorizontalOptions="Center" TextColor="Red" />
+                                <Image Aspect="AspectFit" Source="{Binding ImagenStop}" WidthRequest="100"
+                   IsVisible="True">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding StopCommand}" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                    <StackLayout BackgroundColor="{Binding FondoAtras}" Opacity="{Binding FondoOpacity}" Grid.Row="1">
+                        <Frame Padding="5" WidthRequest="267" HorizontalOptions="CenterAndExpand" HasShadow="True" OutlineColor="Red" HeightRequest="274">
+                            <Grid>
+                                <TableView Intent="Menu">
+                                    <TableRoot>
+                                        <TableSection Title="Lleva hasta ahora" AbsoluteLayout.LayoutFlags="PositionProportional">
+                                            <ViewCell>
+                                                <Grid>
+                                                    <Label Grid.Column="0" Text="Tiempo" 
+                                                           VerticalOptions="Center" TextColor="Black"/>
+                                                    <Label Grid.Column="1" HorizontalOptions="EndAndExpand" 
+                                                           VerticalOptions="Center" TextColor="Black" Text="{Binding Tiempo}"/>
+                                                </Grid>
+                                            </ViewCell>
+                                            <ViewCell>
+                                                <Grid>
+                                                    <Label Grid.Column="0" Text="Publicaciones" 
+                                                           VerticalOptions="Center" TextColor="Black"/>
+                                                    <Label Grid.Column="1" HorizontalOptions="EndAndExpand" 
+                                                           VerticalOptions="Center" TextColor="Black" Text="{Binding Publicaciones}"/>
+                                                </Grid>
+                                            </ViewCell>
+                                            <ViewCell>
+                                                <Grid>
+                                                    <Label Grid.Column="0" Text="Revisitas" 
+                                                           VerticalOptions="Center" TextColor="Black"/>
+                                                    <Label Grid.Column="1" HorizontalOptions="EndAndExpand" 
+                                                           VerticalOptions="Center" TextColor="Black" Text="{Binding Revisitas}"/>
+                                                </Grid>
+                                            </ViewCell>
+                                            <ViewCell>
+                                                <Grid>
+                                                    <Label Grid.Column="0" Text="Curos Biblicos" 
+                                                           VerticalOptions="Center" TextColor="Black"/>
+                                                    <Label Grid.Column="1" HorizontalOptions="EndAndExpand" 
+                                                           VerticalOptions="Center" TextColor="Black" Text="{Binding CursosBiblicos}"/>
+                                                </Grid>
+                                            </ViewCell>
+                                            <ViewCell>
+                                                <Grid>
+                                                    <Label Grid.Column="0" Text="Videos" 
+                                                           VerticalOptions="Center" TextColor="Black"/>
+                                                    <Label Grid.Column="1" HorizontalOptions="EndAndExpand" 
+                                                           VerticalOptions="Center" TextColor="Black" Text="{Binding Videos}"/>
+                                                </Grid>
+                                            </ViewCell>
+                                        </TableSection>
+                                    </TableRoot>
+                                </TableView>
+                            </Grid>
+                        </Frame>
+                    </StackLayout>
+                </Grid>
+            </StackLayout>
+
+            <Frame AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All" 
+                   Content="{Binding InformeModal}"
+                   IsVisible="{Binding IsMostrarModal}"                   
+                   HorizontalOptions="FillAndExpand" 
+                   HasShadow="True">
+            </Frame>
+        </AbsoluteLayout>
+        
+    </ScrollView>
+</ContentPage>
