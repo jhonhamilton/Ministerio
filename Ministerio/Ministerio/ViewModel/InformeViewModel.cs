@@ -178,6 +178,13 @@ namespace Ministerio.ViewModel
                 return new Command(Detener, () => !IsLoad);
             }
         }
+        public ICommand CancelarCommand
+        {
+            get
+            {
+                return new Command(Cancelar, () => !IsLoad);
+            }
+        }
         private void Play()
         {
             IsOcultar = false;
@@ -236,6 +243,13 @@ namespace Ministerio.ViewModel
                 InformeModal = oContentView.CargarModalInforme();
                 OTiempo = "00:00:00";
             }            
+        }
+
+        private void Cancelar()
+        {
+            IsMostrarModal = false;
+            FondoAtras = new Color();
+            FondoOpacity = "1";
         }
     }
 }

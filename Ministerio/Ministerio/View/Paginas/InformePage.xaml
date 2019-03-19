@@ -7,13 +7,14 @@
              Title="Informe" BackgroundColor="White">
     <ScrollView BindingContext="{Binding InformeView}">
         <AbsoluteLayout>
-            <StackLayout BackgroundColor="{Binding FondoAtras}" Opacity="{Binding FondoOpacity}" Padding="5" AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All">
+            <StackLayout BackgroundColor="{Binding FondoAtras}" Opacity="{Binding FondoOpacity}" Padding="5" 
+                         AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <StackLayout BackgroundColor="{Binding FondoAtras}" Opacity="{Binding FondoOpacity}" Grid.Row="0">
+                    <StackLayout Opacity="{Binding FondoOpacity}" Grid.Row="0">
                         <StackLayout Orientation="Vertical" HorizontalOptions="Center">
                             <StackLayout Orientation="Horizontal">
                                 <Label Text="Comienzo: " />
@@ -44,7 +45,7 @@
                             </StackLayout>
                         </Frame>
                     </StackLayout>
-                    <StackLayout BackgroundColor="{Binding FondoAtras}" Opacity="{Binding FondoOpacity}" Grid.Row="1">
+                    <StackLayout Opacity="{Binding FondoOpacity}" Grid.Row="1">
                         <Frame Padding="5" WidthRequest="267" HorizontalOptions="CenterAndExpand" HasShadow="True" OutlineColor="Red" HeightRequest="274">
                             <Grid>
                                 <TableView Intent="Menu">
@@ -99,12 +100,17 @@
                 </Grid>
             </StackLayout>
 
-            <Frame AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All" 
+            <Frame IsVisible="{Binding IsMostrarModal}" HorizontalOptions="Center" 
                    Content="{Binding InformeModal}"
-                   IsVisible="{Binding IsMostrarModal}"                   
-                   HorizontalOptions="FillAndExpand" 
-                   HasShadow="True">
+                   AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All"
+                        HasShadow="True">
             </Frame>
+            <!--<StackLayout IsVisible="{Binding IsMostrarModal}" 
+                         AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All">
+                <Frame HorizontalOptions="Center" Content="{Binding InformeModal}"
+                        HasShadow="True">
+                </Frame>
+            </StackLayout>-->
         </AbsoluteLayout>
         
     </ScrollView>

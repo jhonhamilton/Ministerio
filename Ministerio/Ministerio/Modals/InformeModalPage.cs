@@ -17,71 +17,39 @@ namespace Ministerio.Modals
 
         public Frame CargarModalInforme()
         {
-            var myGrid = new Grid
-            {
-                RowDefinitions = new RowDefinitionCollection()
-                {
-                    new RowDefinition(){ Height = new GridLength(5, GridUnitType.Auto) },
-                    new RowDefinition(){ Height = new GridLength(5, GridUnitType.Auto) },
-                    new RowDefinition(){ Height = new GridLength(5, GridUnitType.Auto) },
-                    new RowDefinition(){ Height = new GridLength(5, GridUnitType.Auto) },
-                    new RowDefinition(){ Height = new GridLength(5, GridUnitType.Auto) },
-                    new RowDefinition(){ Height = new GridLength(5, GridUnitType.Auto) },
-                    new RowDefinition(){ Height = new GridLength(5, GridUnitType.Auto) },
-                    new RowDefinition(){ Height = new GridLength(5, GridUnitType.Auto) },
-                    new RowDefinition(){ Height = new GridLength(5, GridUnitType.Auto) }
-                },
-                ColumnDefinitions = new ColumnDefinitionCollection()
-                {
-                    new ColumnDefinition()
-                    {
-                        Width = new GridLength(10, GridUnitType.Auto)
-                    },
-                    new ColumnDefinition()
-                    {
-                        Width = new GridLength(15, GridUnitType.Auto)
-                    },
-                    new ColumnDefinition()
-                    {
-                        Width = new GridLength(10, GridUnitType.Auto)
-                    },
-                    new ColumnDefinition()
-                    {
-                        Width = new GridLength(10, GridUnitType.Auto)
-                    },
-                }
-            };
+            var myGrid = new Grid();
             var oLabelHead = new Label() { Text = "Control de Registros" };
-            for (int i = 0; i < myGrid.RowDefinitions.Count; i++)
+            for (int i = 0; i < 9; i++)
             {
                 var image1 = new Image() { Source = "Menos_ic_Res.png", WidthRequest = 40 };
                 var oEntry = EscribirPlaceHolder(i, this.Tiempo);
+                oEntry.HorizontalOptions = LayoutOptions.FillAndExpand;
                 var image2 = new Image { Source = "Reloj_ic.png", WidthRequest = 40 };
                 var image3 = new Image() { Source = "Mas_ic_Sum.png", WidthRequest = 40 };
-                if(i == 0)
+                var lisView = new List<Xamarin.Forms.View>();
+                var oStack = new StackLayout() { Orientation = StackOrientation.Horizontal };
+                if (i == 0)
                 {
-                    myGrid.Children.Add(image1, 0, i);
-                    myGrid.Children.Add(oEntry, 1, i);
-                    myGrid.Children.Add(image2, 2, i);
-                    myGrid.Children.Add(image3, 3, i);
-                }
-                else
-                {
-                    image1.HorizontalOptions = LayoutOptions.FillAndExpand;
-                    oEntry.HorizontalOptions = LayoutOptions.FillAndExpand;
-                    myGrid.Children.Add(image1, 0, i);
-                    myGrid.Children.Add(oEntry, 1, i);                    
-                    myGrid.Children.Add(image3, 3, i);
+                    oStack.Children.Add(image1);
+                    oStack.Children.Add(oEntry);
+                    oStack.Children.Add(image2);
+                    oStack.Children.Add(image3);
                 }
                 if (i == 8)
                 {
                     var oCancelar = new Button() { Text = "Cancelar", HorizontalOptions = LayoutOptions.FillAndExpand };
+                    oCancelar.SetBinding(Button.CommandProperty, new Binding() { Path = "CancelarCommand" });
                     var oAnadir = new Button() { Text = "Añadir", HorizontalOptions = LayoutOptions.FillAndExpand };
-                    var oStack = new StackLayout() { Orientation = StackOrientation.Horizontal };
                     oStack.Children.Add(oCancelar);
-                    oStack.Children.Add(oAnadir);
-                    myGrid.Children.AddVertical(oStack);
-                }                
+                    oStack.Children.Add(oAnadir);                    
+                }
+                else
+                {
+                    oStack.Children.Add(image1);
+                    oStack.Children.Add(oEntry);                    
+                    oStack.Children.Add(image3);
+                }
+                myGrid.Children.AddVertical(oStack);
             }
             var stack = new StackLayout()
             {
