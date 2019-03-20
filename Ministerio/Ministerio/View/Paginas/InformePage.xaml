@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Ministerio.View.InformePage"
+             x:Class="Ministerio.View.InformePage"             
              xmlns:local="clr-namespace:Ministerio"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="Informe" BackgroundColor="White">
     <ScrollView BindingContext="{Binding InformeView}">
-        <AbsoluteLayout>
+        <AbsoluteLayout>            
             <StackLayout BackgroundColor="{Binding FondoAtras}" Opacity="{Binding FondoOpacity}" Padding="5" 
                          AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All">
                 <Grid>
@@ -99,7 +99,7 @@
                     </StackLayout>
                 </Grid>
             </StackLayout>
-
+            
             <Frame IsVisible="{Binding IsMostrarModal}" HorizontalOptions="Center" 
                    Content="{Binding InformeModal}"
                    AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All"
