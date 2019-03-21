@@ -8,46 +8,46 @@ namespace Ministerio.Servicio
 {
     public class InformeServicio
     {
-        public ObservableCollection<InformeModel> informes { get; set; }
+        public List<MiInforme> Informes { get; set; }
         public InformeServicio()
         {
-            if (informes == null)
+            if (Informes == null)
             {
-                informes = new ObservableCollection<InformeModel>();
+                Informes = new List<MiInforme>();
             }
         }
 
-        public ObservableCollection<InformeModel> Consultar()
+        public List<MiInforme> Consultar()
         {
-            return informes;
+            return Informes;
         }
 
-        public void Guardar(InformeModel informe)
+        public void Guardar(MiInforme informe)
         {
-            informes.Add(informe);
+            Informes.Add(informe);
         }
-        public void Modificar(InformeModel informe)
+        public void Modificar(MiInforme informe)
         {
-            for (int i = 0; i < informes.Count; i++)
+            for (int i = 0; i < Informes.Count; i++)
             {
-                if (informes[i].Id == informe.Id)
+                if (Informes[i].Id == informe.Id)
                 {
-                    informes[i] = informe;
+                    Informes[i] = informe;
                 }
             }
         }
         public void Eliminar(string idInforme)
         {
-            var oInformEliminar = new InformeModel();
-            for (int i = 0; i < informes.Count; i++)
+            var oInformEliminar = new MiInforme();
+            for (int i = 0; i < Informes.Count; i++)
             {
-                if (informes[i].Id == idInforme)
+                if (Informes[i].Id == idInforme)
                 {
-                    oInformEliminar = informes[i];
+                    oInformEliminar = Informes[i];
                     break;
                 }
             }
-            informes.Remove(oInformEliminar);
+            Informes.Remove(oInformEliminar);
         }
     }
 }

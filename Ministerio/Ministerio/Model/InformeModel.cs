@@ -34,6 +34,7 @@ namespace Ministerio.Model
             set
             {
                 _Publicaciones = value;
+                OnPropertyChanged();
             }
         }
         public int Horas
@@ -188,17 +189,17 @@ namespace Ministerio.Model
         InformeServicio servicio = new InformeServicio();
         public InformeModel()
         {
-            Informes = new ObservableCollection<InformeModel>();
+            //Informes = new ObservableCollection<InformeModel>();
         }
         public ObservableCollection<InformeModel> _Informes { get; set; }
-        public ObservableCollection<InformeModel> Informes
-        {
-            get { return _Informes; }
-            set
-            {
-                _Informes = value;
-                OnPropertyChanged();
-            }
-        }
+        //public ObservableCollection<InformeModel> Informes
+        //{
+        //    get { return _Informes; }
+        //    set
+        //    {
+        //        _Informes = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
     }
 }
