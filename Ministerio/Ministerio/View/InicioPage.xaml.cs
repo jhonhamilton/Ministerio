@@ -1,15 +1,14 @@
-﻿using Xamarin.Forms;
+﻿using BottomBar.XamarinForms;
 using Xamarin.Forms.Xaml;
 
 namespace Ministerio.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class InicioPage : TabbedPage
+    public partial class InicioPage : BottomBarPage
     {
-        public InicioPage ()
+        public InicioPage()
         {
             InitializeComponent();
-            
         }
     }
 }

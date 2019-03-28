@@ -1,4 +1,5 @@
-﻿using Ministerio.View;
+﻿using Ministerio.Sqlite.Repositorio;
+using Ministerio.View;
 using Ministerio.ViewModel;
 using System;
 using Xamarin.Forms;
@@ -10,11 +11,11 @@ namespace Ministerio
     public partial class App : Application
     {
         public static NavigationPage Navigator { get; internal set; }
-        public App()
+        public App(string filename)
         {
             InitializeComponent();
 
-            //MainPage = new MainPage();
+            InformeRepositorio.Inicializador(filename);
             var mainViewModel = MainViewModel.GetInstance();
             mainViewModel.InformeView = new InformeViewModel();
             MainPage = new MasterPage();

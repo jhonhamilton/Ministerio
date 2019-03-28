@@ -9,12 +9,12 @@ using Xamarin.Forms.Xaml;
 
 namespace Ministerio.View
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class InformePage : ContentPage
-	{
-		public InformePage ()
-		{
-			InitializeComponent ();
-		}
-	}
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class InformePage : ContentPage
+    {
+        public InformePage()
+        {
+            InitializeComponent();
+        }
+    }
 }

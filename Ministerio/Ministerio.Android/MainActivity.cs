@@ -19,7 +19,8 @@ namespace Ministerio.Droid
 
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            LoadApplication(new App());
+            string dbPath = FileAccess.GetLocalFilePath("Ministerio.db3");
+            LoadApplication(new App(dbPath));
         }
     }
 }

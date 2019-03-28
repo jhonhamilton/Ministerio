@@ -20,7 +20,7 @@
                                 <Label Text="{Binding TiempoInicial}" TextColor="Black" />
                             </StackLayout>
                         </StackLayout>
-                        <Frame Padding="5" WidthRequest="267" HorizontalOptions="Center" HasShadow="True" OutlineColor="Red" HeightRequest="50">
+                        <Frame Padding="5" WidthRequest="267" HorizontalOptions="Center" HasShadow="True" BorderColor="Black" OutlineColor="FloralWhite" HeightRequest="50">
                             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                                 <Image Aspect="AspectFit" Source="{Binding ImagenPlay}"  
                    IsVisible="{Binding IsOcultar}" WidthRequest="100" >
@@ -45,7 +45,7 @@
                         </Frame>
                     </StackLayout>
                     <StackLayout Opacity="{Binding FondoOpacity}" Grid.Row="1">
-                        <Frame Padding="5" WidthRequest="267" HorizontalOptions="CenterAndExpand" HasShadow="True" OutlineColor="Red" HeightRequest="274">
+                        <Frame Padding="5" WidthRequest="267" HorizontalOptions="CenterAndExpand" HasShadow="True" BorderColor="Black" OutlineColor="FloralWhite" HeightRequest="274">
                             <Grid>
                                 <TableView Intent="Menu">
                                     <TableRoot>
@@ -96,16 +96,17 @@
                             </Grid>
                         </Frame>
                     </StackLayout>
-                    
                 </Grid>
             </StackLayout>
-            
-            <Frame IsVisible="{Binding IsMostrarModal}" HorizontalOptions="Center" 
+
+            <Frame IsVisible="{Binding IsMostrarModal}" HorizontalOptions="CenterAndExpand" 
                    Content="{Binding InformeModal}"
+                   Padding="5" WidthRequest="290"
+                    BorderColor="Black" OutlineColor="FloralWhite"
                    AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All"
                         HasShadow="True">
-            </Frame>            
+            </Frame>
         </AbsoluteLayout>
-        
+
     </ScrollView>
 </ContentPage>

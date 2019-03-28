@@ -1,32 +1,39 @@
-﻿using Ministerio.Model;
+﻿using Ministerio.Interfaces;
+using Ministerio.Model;
+using Ministerio.Sqlite.Entidades;
+using Ministerio.Sqlite.Repositorio;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using Xamarin.Forms;
 
 namespace Ministerio.Servicio
 {
     public class InformeServicio
     {
-        public List<MiInforme> Informes { get; set; }
+        public List<Informe> Informes { get; set; }
         public InformeServicio()
         {
             if (Informes == null)
             {
-                Informes = new List<MiInforme>();
+                Informes = new List<Informe>();
             }
         }
 
-        public List<MiInforme> Consultar()
+        public IEnumerable<Informe> Consultar()
         {
-            return Informes;
+            //return Informes;
+            return InformeRepositorio.Instancia.ObtenerTodosInformes();
         }
 
-        public void Guardar(MiInforme informe)
+        public void Guardar(Informe informe)
         {
-            Informes.Add(informe);
+            InformeRepositorio.Instancia.AgregarInforme(informe);
+            DependencyService.Get<IMessage>().ShortToast(InformeRepositorio.Instancia.EstadoMensaje);
+            //Informes.Add(informe);
         }
-        public void Modificar(MiInforme informe)
+        public void Modificar(Informe informe)
         {
             for (int i = 0; i < Informes.Count; i++)
             {
@@ -36,9 +43,9 @@ namespace Ministerio.Servicio
                 }
             }
         }
-        public void Eliminar(string idInforme)
+        public void Eliminar(int idInforme)
         {
-            var oInformEliminar = new MiInforme();
+            var oInformEliminar = new Informe();
             for (int i = 0; i < Informes.Count; i++)
             {
                 if (Informes[i].Id == idInforme)

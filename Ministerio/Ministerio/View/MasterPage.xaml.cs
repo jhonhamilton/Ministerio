@@ -9,13 +9,13 @@ using Xamarin.Forms.Xaml;
 
 namespace Ministerio.View
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class MasterPage : MasterDetailPage
-	{
-		public MasterPage ()
-		{
-			InitializeComponent ();
-		}
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class MasterPage : MasterDetailPage
+    {
+        public MasterPage()
+        {
+            InitializeComponent();            
+        }
         protected override void OnAppearing()
         {
             base.OnAppearing();

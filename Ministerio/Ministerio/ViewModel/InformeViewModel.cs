@@ -2,6 +2,7 @@
 using Ministerio.Modals;
 using Ministerio.Model;
 using Ministerio.Servicio;
+using Ministerio.Sqlite.Entidades;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -210,19 +211,20 @@ namespace Ministerio.ViewModel
         }
         private async Task Guardar()
         {
-            IsLoad = true;
-            Guid idInforme = Guid.NewGuid();
-            var oMiInforme = new MiInforme
+            IsLoad = true;            
+            var oMiInforme = new Informe
             {
-                Tiempo = this.TiempoBinding,
+                Hora = Convert.ToInt32(this.TiempoBinding.Split(':')[0]),
+                Minutos = Convert.ToInt32(this.TiempoBinding.Split(':')[1]),
+                Segundos = Convert.ToInt32(this.TiempoBinding.Split(':')[2]),                
                 Libros = (this.LibrosBinding != "" ? Convert.ToInt32(this.LibrosBinding.ToString()) : 0),
                 Revisitas = (this.RevisitasBinding != "" ? Convert.ToInt32(this.RevisitasBinding) : 0),
                 Revistas = (this.RevistasBinding != "" ? Convert.ToInt32(this.RevistasBinding) : 0),
                 CursosBiblicos = (this.CursosBiblicosBinding != "" ? Convert.ToInt32(this.CursosBiblicosBinding) : 0),
                 Videos = (this.VideosBinding != "" ? Convert.ToInt32(this.VideosBinding) : 0),
-                Tratados = (this.TratadosBinding != "" ? Convert.ToInt32(this.TratadosBinding) : 0),
+                TratadosArticulos = (this.TratadosBinding != "" ? Convert.ToInt32(this.TratadosBinding) : 0),
                 Folletos = (this.FolletosBinding != "" ? Convert.ToInt32(this.FolletosBinding) : 0),
-                Id = idInforme.ToString()
+                Fecha = DateTime.Now
             };
             servicio.Guardar(oMiInforme);
             ListarRegistro();
@@ -247,11 +249,11 @@ namespace Ministerio.ViewModel
             var Informes = servicio.Consultar();
             int oHoras = 0, oMinutos = 0, oSegundos = 0, oFolletos = 0, oRevisitas = 0, oRevistas = 0, oVideos = 0, oLibros = 0, oCursosBiblicos = 0, oTratados = 0;
             string oTiempo = "";
-            foreach (MiInforme item in Informes)
+            foreach (Informe item in Informes)
             {
-                oHoras += Convert.ToInt32(item.Tiempo.Split(':')[0]);
-                oMinutos += Convert.ToInt32(item.Tiempo.Split(':')[1]);
-                oSegundos += Convert.ToInt32(item.Tiempo.Split(':')[2]);
+                oHoras += item.Hora;
+                oMinutos += item.Minutos;
+                oSegundos += item.Segundos;
                 oTiempo = (oHoras + ":" + oMinutos + ":" + oSegundos);
                 oFolletos += item.Folletos;
                 oRevisitas += item.Revisitas;
@@ -259,7 +261,7 @@ namespace Ministerio.ViewModel
                 oVideos += item.Videos;
                 oLibros += item.Libros;
                 oCursosBiblicos += item.CursosBiblicos;
-                oTratados += item.Tratados;
+                oTratados += item.TratadosArticulos;
             }
             Tiempo = oTiempo;
             Folletos = oFolletos;
