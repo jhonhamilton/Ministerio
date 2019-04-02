@@ -23,15 +23,14 @@ namespace Ministerio.Servicio
 
         public IEnumerable<Informe> Consultar()
         {
-            //return Informes;
             return InformeRepositorio.Instancia.ObtenerTodosInformes();
         }
 
         public void Guardar(Informe informe)
         {
             InformeRepositorio.Instancia.AgregarInforme(informe);
-            DependencyService.Get<IMessage>().ShortToast(InformeRepositorio.Instancia.EstadoMensaje);
-            //Informes.Add(informe);
+            DependencyService.Get<IMessage>().LongToast(InformeRepositorio.Instancia.EstadoMensaje);
+            //DependencyService.Get<IMessage>().LongToast(InformeRepositorio.Instancia.estadoMensaje);
         }
         public void Modificar(Informe informe)
         {

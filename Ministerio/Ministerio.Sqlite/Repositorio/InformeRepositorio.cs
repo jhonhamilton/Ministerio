@@ -1,10 +1,9 @@
-﻿using System;
+﻿using Ministerio.Sqlite.Entidades;
+using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Ministerio.Sqlite.Entidades;
-using SQLite;
+using SQLitePCL;
 
 namespace Ministerio.Sqlite.Repositorio
 {
@@ -12,6 +11,7 @@ namespace Ministerio.Sqlite.Repositorio
     {
         private SQLiteConnection con;
         private static InformeRepositorio instancia;
+        public string EstadoMensaje;
         public static InformeRepositorio Instancia
         {
             get
@@ -40,8 +40,7 @@ namespace Ministerio.Sqlite.Repositorio
             con = new SQLiteConnection(dbPath);
             con.CreateTable<Informe>();
         }
-
-        public string EstadoMensaje;
+        
         public int AgregarInforme(Informe informe)
         {
             int resultado = 0;

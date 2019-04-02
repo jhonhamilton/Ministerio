@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -16,9 +17,38 @@ namespace Ministerio.Droid
     {
         public static string GetLocalFilePath(string filename)
         {
-            string path = System.Environment.GetFolderPath(
+            var path = System.Environment.GetFolderPath(
                 System.Environment.SpecialFolder.Personal);
-            return System.IO.Path.Combine(path, filename);
+            var file = System.IO.Path.Combine(path, filename);
+            return file;
+        }
+
+        public static bool ExistDirectory(string path)
+        {
+            return Directory.Exists(path);
+        }
+
+        public static void CreateDirectoryFilePath(string path)
+        {
+            Directory.CreateDirectory(path);
+        }
+
+        public static bool ExistFile(string path)
+        {
+            return File.Exists(path);
+        }
+
+        public static void CreateFile(string path)
+        {
+            File.Create(path);
+        }
+
+        public static void DeleteFile(string path)
+        {
+            if (ExistFile(path))
+            {
+                File.Delete(path);
+            }
         }
     }
 }

@@ -21,6 +21,15 @@ namespace Ministerio
             MainPage = new MasterPage();
         }
 
+        public App()
+        {
+            InitializeComponent();
+            
+            var mainViewModel = MainViewModel.GetInstance();
+            mainViewModel.InformeView = new InformeViewModel();
+            MainPage = new MasterPage();
+        }
+
         protected override void OnStart()
         {
             // Handle when your app starts

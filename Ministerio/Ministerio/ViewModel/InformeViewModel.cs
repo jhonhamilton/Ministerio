@@ -14,156 +14,156 @@ namespace Ministerio.ViewModel
     public class InformeViewModel : InformeModel
     {
         #region Atributos Modal
-        private string _TiempoBinding;
-        private string _RevistasBinding = "";
-        private string _FolletosBinding = "";
-        private string _LibrosBinding = "";
-        private string _TratadosBinding = "";
-        private string _VideosBinding = "";
-        private string _RevisitasBinding = "";
-        private string _CursosBiblicosBinding = "";        
+        private string _tiempoBinding;
+        private string _revistasBinding = "";
+        private string _folletosBinding = "";
+        private string _librosBinding = "";
+        private string _tratadosBinding = "";
+        private string _videosBinding = "";
+        private string _revisitasBinding = "";
+        private string _cursosBiblicosBinding = "";        
         #endregion
 
         #region Propiedades Modal
         public string TiempoBinding
         {
-            get { return _TiempoBinding; }
+            get { return _tiempoBinding; }
             set
             {
-                _TiempoBinding = value;
+                _tiempoBinding = value;
                 OnPropertyChanged();
             }
         }
         public string RevistasBinding
         {
-            get { return _RevistasBinding; }
+            get { return _revistasBinding; }
             set
             {
-                _RevistasBinding = value;
+                _revistasBinding = value;
                 OnPropertyChanged();
             }
         }
         public string FolletosBinding
         {
-            get { return _FolletosBinding; }
+            get { return _folletosBinding; }
             set
             {
-                _FolletosBinding = value;
+                _folletosBinding = value;
                 OnPropertyChanged();
             }
         }
         public string LibrosBinding
         {
-            get { return _LibrosBinding; }
+            get { return _librosBinding; }
             set
             {
-                _LibrosBinding = value;
+                _librosBinding = value;
                 OnPropertyChanged();
             }
         }
         public string TratadosBinding
         {
-            get { return _TratadosBinding; }
+            get { return _tratadosBinding; }
             set
             {
-                _TratadosBinding = value;
+                _tratadosBinding = value;
                 OnPropertyChanged();
             }
         }
         public string VideosBinding
         {
-            get { return _VideosBinding; }
+            get { return _videosBinding; }
             set
             {
-                _VideosBinding = value;
+                _videosBinding = value;
                 OnPropertyChanged();
             }
         }
         public string RevisitasBinding
         {
-            get { return _RevisitasBinding; }
+            get { return _revisitasBinding; }
             set
             {
-                _RevisitasBinding = value;
+                _revisitasBinding = value;
                 OnPropertyChanged();
             }
         }
         public string CursosBiblicosBinding
         {
-            get { return _CursosBiblicosBinding; }
+            get { return _cursosBiblicosBinding; }
             set
             {
-                _CursosBiblicosBinding = value;
+                _cursosBiblicosBinding = value;
                 OnPropertyChanged();
             }
         }
         #endregion
 
         #region Atributos Informe
-        private bool _IsOcultar = true;
-        private bool _IsMostrarModal = false;
-        private bool _IsMostrar = false;
-        private string _ImagenPay = "ic_play_circle.png";
-        private string _ImagenPause = "ic_pause_circle.png";
+        private bool _isOcultar = true;
+        private bool _isMostrarModal = false;
+        private bool _isMostrar = false;
+        private string _imagenPay = "ic_play_circle.png";
+        private string _imagenPause = "ic_pause_circle.png";
         private string _ImagenStop = "ic_stop.png";
-        private bool Pausado = false;
-        private Color _FondoAtras = Color.White;
-        private string _FondoOpacity = "1";
-        private Frame _InformeModal = null;
+        private bool pausado = false;
+        private Color _fondoAtras = Color.White;
+        private string _fondoOpacity = "1";
+        private Frame _informeModal = null;
         #endregion
 
         #region Propiedades Informe
         public Frame InformeModal
         {
-            get { return _InformeModal; }
+            get { return _informeModal; }
             set
             {
-                _InformeModal = value;
+                _informeModal = value;
                 OnPropertyChanged();
             }
         }        
         public Color FondoAtras
         {
-            get { return _FondoAtras; }
+            get { return _fondoAtras; }
             set
             {
-                _FondoAtras = value;
+                _fondoAtras = value;
                 ; OnPropertyChanged();
             }
         }        
         public string FondoOpacity
         {
-            get { return _FondoOpacity; }
+            get { return _fondoOpacity; }
             set
             {
-                _FondoOpacity = value;
+                _fondoOpacity = value;
                 OnPropertyChanged();
             }
         }        
         public bool IsMostrarModal
         {
-            get { return _IsMostrarModal; }
+            get { return _isMostrarModal; }
             set
             {
-                _IsMostrarModal = value;
+                _isMostrarModal = value;
                 OnPropertyChanged();
             }
         }        
         public string ImagenPlay
         {
-            get { return _ImagenPay; }
+            get { return _imagenPay; }
             set
             {
-                _ImagenPay = value;
+                _imagenPay = value;
                 OnPropertyChanged();
             }
         }
         public string ImagenPause
         {
-            get { return _ImagenPause; }
+            get { return _imagenPause; }
             set
             {
-                _ImagenPause = value;
+                _imagenPause = value;
                 OnPropertyChanged();
             }
         }
@@ -178,19 +178,19 @@ namespace Ministerio.ViewModel
         }
         public bool IsOcultar
         {
-            get { return _IsOcultar; }
+            get { return _isOcultar; }
             set
             {
-                _IsOcultar = value;
+                _isOcultar = value;
                 OnPropertyChanged();
             }
         }
         public bool IsMostrar
         {
-            get { return _IsMostrar; }
+            get { return _isMostrar; }
             set
             {
-                _IsMostrar = value;
+                _isMostrar = value;
                 OnPropertyChanged();
             }
         }
@@ -230,7 +230,7 @@ namespace Ministerio.ViewModel
             ListarRegistro();
             await Task.Delay(500);
             Cancelar();
-            DependencyService.Get<IMessage>().ShortToast("Añadido al Informe");
+            //DependencyService.Get<IMessage>().ShortToast("Añadido al Informe");
             IsLoad = false;
         }
         void LimpiarCamposGuardar()
@@ -305,7 +305,7 @@ namespace Ministerio.ViewModel
         {
             IsOcultar = false;
             IsMostrar = true;
-            if (!Pausado)
+            if (!pausado)
             {
                 TiempoInicial = DateTime.Now.ToString("HH:mm:ss");
             }
@@ -327,7 +327,7 @@ namespace Ministerio.ViewModel
             OTiempo = string.Format("{0:hh\\:mm\\:ss}", mStopWatch.Elapsed);
             IsOcultar = true;
             IsMostrar = false;
-            Pausado = true;
+            pausado = true;
         }
         private void Detener()
         {
@@ -374,7 +374,7 @@ namespace Ministerio.ViewModel
         #region Constructor
         public InformeViewModel()
         {
-            var Informes = servicio.Consultar();
+            ListarRegistro();
         }
         #endregion
     }

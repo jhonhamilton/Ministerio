@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.IO;
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
@@ -20,7 +20,9 @@ namespace Ministerio.Droid
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             string dbPath = FileAccess.GetLocalFilePath("Ministerio.db3");
+            
             LoadApplication(new App(dbPath));
+            //LoadApplication(new App());
         }
     }
 }
