@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using SuaveControls.FloatingActionButton.iOS.Renderers;
 using UIKit;
 
 namespace Ministerio.iOS
@@ -24,7 +25,8 @@ namespace Ministerio.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             string dbPath = FileAccess.GetLocalFilePath("Ministerio.db3");
-            LoadApplication(new App(dbPath));        
+            LoadApplication(new App(dbPath));
+            FloatingActionButtonRenderer.InitRenderer();
             return base.FinishedLaunching(app, options);
         }
     }

@@ -128,7 +128,7 @@ namespace Ministerio.ViewModel
             set
             {
                 _fondoAtras = value;
-                ; OnPropertyChanged();
+                OnPropertyChanged();
             }
         }        
         public string FondoOpacity
@@ -375,6 +375,7 @@ namespace Ministerio.ViewModel
         public InformeViewModel()
         {
             ListarRegistro();
+            MainViewModel.GetInstance().InformeAlls = new InformeAllViewModel();
         }
         #endregion
     }

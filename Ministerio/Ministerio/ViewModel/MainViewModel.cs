@@ -8,6 +8,7 @@ namespace Ministerio.ViewModel
     public class MainViewModel
     {
         public InformeViewModel InformeView { get; set; }
+        public InformeAllViewModel InformeAlls { get; set; }
         public ObservableCollection<MenuItemViewModel> Menu { get; set; }
         public MainViewModel()
         {
@@ -19,9 +20,11 @@ namespace Ministerio.ViewModel
 
         private void LoadMenu()
         {
-            this.Menu = new ObservableCollection<MenuItemViewModel>();
-            this.Menu.Add(new MenuItemViewModel("ic_play_circle.png", "Informe", "InformePage"));
-            this.Menu.Add(new MenuItemViewModel("ic_stop.png", "Exit", "LoginPage"));
+            this.Menu = new ObservableCollection<MenuItemViewModel>
+            {
+                new MenuItemViewModel("ic_play_circle.png", "Informe", "InformePage"),
+                new MenuItemViewModel("ic_stop.png", "Exit", "LoginPage")
+            };
         }
 
         static MainViewModel instance;

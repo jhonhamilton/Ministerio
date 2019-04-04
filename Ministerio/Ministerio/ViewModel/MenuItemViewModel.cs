@@ -1,4 +1,4 @@
-﻿using Ministerio.View;
+﻿using Ministerio.View.Paginas;
 using System.Windows.Input;
 using Xamarin.Forms;
 

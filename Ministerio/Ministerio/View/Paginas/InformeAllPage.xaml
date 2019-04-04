@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"             
+             x:Class="Ministerio.View.Paginas.InformeAllPage"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="Informes" BackgroundColor="White">
+    <ContentPage.Content>        
+        <ScrollView BindingContext="{Binding InformeAlls}">            
+            <StackLayout>
+                <Label Text="Hola Mundo" />
+                <ListView 
+                    ItemsSource="{Binding MyItemsSource}" 
+                    CachingStrategy="RecycleElement" 
+                    HasUnevenRows="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout>
+                                    <Label Text="Curso Biblico" TextColor="Black" />
+                                    <Label Text="{Binding Revistas}" TextColor="Black"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <!--<cv:CarouselViewControl ItemsSource="{Binding MyItemsSource}">
+                    <cv:CarouselViewControl.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Text="Curso Biblico" />
+                                    <Label Grid.Column="1" Text="{Binding MyItemsSource.CursosBiblicos}"/>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </cv:CarouselViewControl.ItemTemplate>
+                </cv:CarouselViewControl>-->
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
