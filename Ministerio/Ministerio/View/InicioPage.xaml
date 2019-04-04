@@ -2,13 +2,23 @@
 <xf:BottomBarPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:xf="clr-namespace:BottomBar.XamarinForms;assembly=BottomBar.XamarinForms"
+             xmlns:xxf="clr-namespace:Ministerio.BottomBar"
              xmlns:page="clr-namespace:Ministerio.View.Paginas"
-             x:Class="Ministerio.View.InicioPage">
-  <!--xmlns:xf="clr-namespace:BottomBar.XamarinForms;assembly=BottomBar.XamarinForms"-->
+             x:Class="Ministerio.View.InicioPage">  
   <!--Pages can be added as references or inline-->
 
-  <page:InformePage Title="Inicio"/>    
-  <page:InformeAllPage Title="Informe 1" xf:BottomBarPageExtensions.TabColor="#F323ff"/>    
-  <ContentPage Title="Tab 2" xf:BottomBarPageExtensions.TabColor="#7B1FA2"></ContentPage>
-  <ContentPage Title="Tab 3" xf:BottomBarPageExtensions.TabColor="#FF5252"></ContentPage>
+  <page:InformePage Title="Inicio" Icon="ic_action_home.png"/>    
+  <page:InformeAllPage 
+    Title="Informe" Icon="ic_action_assignment.png"
+    xf:BottomBarPageExtensions.TabColor="#F323ff"
+    xxf:BottomBarPageExtensions.BadgeCount="6"
+    xxf:BottomBarPageExtensions.BadgeColor="DeepPink"/>    
+  <ContentPage 
+    Title="Tab 2" 
+    xf:BottomBarPageExtensions.TabColor="#7B1FA2"
+    xxf:BottomBarPageExtensions.BadgeCount="2"
+    xxf:BottomBarPageExtensions.BadgeColor="Black" />
+  <ContentPage
+    Title="Tab 3"
+    xf:BottomBarPageExtensions.TabColor="#FF5252" />
 </xf:BottomBarPage>

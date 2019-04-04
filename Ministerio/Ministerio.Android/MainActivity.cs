@@ -20,7 +20,7 @@ namespace Ministerio.Droid
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             string dbPath = FileAccess.GetLocalFilePath("Ministerio.db3");
-            
+            Refractored.FabControl.Droid.FloatingActionButtonViewRenderer.Init();
             LoadApplication(new App(dbPath));
             //LoadApplication(new App());
         }

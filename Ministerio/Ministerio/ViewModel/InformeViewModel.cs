@@ -21,7 +21,7 @@ namespace Ministerio.ViewModel
         private string _tratadosBinding = "";
         private string _videosBinding = "";
         private string _revisitasBinding = "";
-        private string _cursosBiblicosBinding = "";        
+        private string _cursosBiblicosBinding = "";
         #endregion
 
         #region Propiedades Modal
@@ -121,7 +121,7 @@ namespace Ministerio.ViewModel
                 _informeModal = value;
                 OnPropertyChanged();
             }
-        }        
+        }
         public Color FondoAtras
         {
             get { return _fondoAtras; }
@@ -130,7 +130,7 @@ namespace Ministerio.ViewModel
                 _fondoAtras = value;
                 OnPropertyChanged();
             }
-        }        
+        }
         public string FondoOpacity
         {
             get { return _fondoOpacity; }
@@ -139,7 +139,7 @@ namespace Ministerio.ViewModel
                 _fondoOpacity = value;
                 OnPropertyChanged();
             }
-        }        
+        }
         public bool IsMostrarModal
         {
             get { return _isMostrarModal; }
@@ -148,7 +148,7 @@ namespace Ministerio.ViewModel
                 _isMostrarModal = value;
                 OnPropertyChanged();
             }
-        }        
+        }
         public string ImagenPlay
         {
             get { return _imagenPay; }
@@ -195,7 +195,7 @@ namespace Ministerio.ViewModel
             }
         }
         #endregion
-        
+
         #region Instancias
         InformeServicio servicio = new InformeServicio();
         Stopwatch mStopWatch = new Stopwatch();
@@ -211,12 +211,12 @@ namespace Ministerio.ViewModel
         }
         private async Task Guardar()
         {
-            IsLoad = true;            
+            IsLoad = true;
             var oMiInforme = new Informe
             {
                 Hora = Convert.ToInt32(this.TiempoBinding.Split(':')[0]),
                 Minutos = Convert.ToInt32(this.TiempoBinding.Split(':')[1]),
-                Segundos = Convert.ToInt32(this.TiempoBinding.Split(':')[2]),                
+                Segundos = Convert.ToInt32(this.TiempoBinding.Split(':')[2]),
                 Libros = (this.LibrosBinding != "" ? Convert.ToInt32(this.LibrosBinding.ToString()) : 0),
                 Revisitas = (this.RevisitasBinding != "" ? Convert.ToInt32(this.RevisitasBinding) : 0),
                 Revistas = (this.RevistasBinding != "" ? Convert.ToInt32(this.RevistasBinding) : 0),
@@ -301,6 +301,21 @@ namespace Ministerio.ViewModel
                 return new Command(Cancelar, () => !IsLoad);
             }
         }
+        public ICommand AddFlotanteCommand
+        {
+            get
+            {
+                return new Command(AddInforme, () => !IsLoad);
+            }
+        }
+
+        private void AddInforme()
+        {
+            IsMostrarModal = true;
+            FondoAtras = Color.Gray;
+            FondoOpacity = "0.7";
+            InformeModal = new InformeModalPage().CargarModalInforme();
+        }
         private void Play()
         {
             IsOcultar = false;
@@ -354,8 +369,7 @@ namespace Ministerio.ViewModel
                 FondoAtras = Color.Gray;
                 FondoOpacity = "0.7";
                 TiempoBinding = (Horas + ":" + Minutos + ":" + Segundos);
-                var oContentView = new InformeModalPage();
-                InformeModal = oContentView.CargarModalInforme();
+                InformeModal = new InformeModalPage().CargarModalInforme();
                 OTiempo = "00:00:00";
                 TiempoInicial = "";
             }
