@@ -103,6 +103,7 @@ namespace Ministerio.ViewModel
         private bool _isOcultar = true;
         private bool _isMostrarModal = false;
         private bool _isMostrar = false;
+        private bool _isMostrarFlotante = true;
         private string _imagenPay = "ic_play_circle.png";
         private string _imagenPause = "ic_pause_circle.png";
         private string _ImagenStop = "ic_stop.png";
@@ -113,6 +114,15 @@ namespace Ministerio.ViewModel
         #endregion
 
         #region Propiedades Informe
+        public bool IsMostrarFlotante
+        {
+            get { return _isMostrarFlotante; }
+            set
+            {
+                _isMostrarFlotante = value;
+                OnPropertyChanged();
+            }
+        }
         public Frame InformeModal
         {
             get { return _informeModal; }
@@ -212,6 +222,10 @@ namespace Ministerio.ViewModel
         private async Task Guardar()
         {
             IsLoad = true;
+            if (TiempoBinding == null)
+            {
+                TiempoBinding = "00:00:00";
+            }
             var oMiInforme = new Informe
             {
                 Hora = Convert.ToInt32(this.TiempoBinding.Split(':')[0]),
@@ -263,7 +277,7 @@ namespace Ministerio.ViewModel
                 oCursosBiblicos += item.CursosBiblicos;
                 oTratados += item.TratadosArticulos;
             }
-            Tiempo = oTiempo;
+            Tiempo = (oTiempo == "" ? "00:00:00" : oTiempo);
             Folletos = oFolletos;
             Revistas = oRevistas;
             Revisitas = oRevisitas;
@@ -301,17 +315,17 @@ namespace Ministerio.ViewModel
                 return new Command(Cancelar, () => !IsLoad);
             }
         }
-        public ICommand AddFlotanteCommand
+        public ICommand AddInformeCommand
         {
             get
             {
                 return new Command(AddInforme, () => !IsLoad);
             }
         }
-
         private void AddInforme()
         {
             IsMostrarModal = true;
+            IsMostrarFlotante = false;
             FondoAtras = Color.Gray;
             FondoOpacity = "0.7";
             InformeModal = new InformeModalPage().CargarModalInforme();
@@ -366,6 +380,7 @@ namespace Ministerio.ViewModel
                     }
                 }
                 IsMostrarModal = true;
+                IsMostrarFlotante = false;
                 FondoAtras = Color.Gray;
                 FondoOpacity = "0.7";
                 TiempoBinding = (Horas + ":" + Minutos + ":" + Segundos);
@@ -377,6 +392,7 @@ namespace Ministerio.ViewModel
         private void Cancelar()
         {
             IsMostrarModal = false;
+            IsMostrarFlotante = true;
             FondoAtras = new Color();
             FondoOpacity = "1";
             LimpiarCamposGuardar();

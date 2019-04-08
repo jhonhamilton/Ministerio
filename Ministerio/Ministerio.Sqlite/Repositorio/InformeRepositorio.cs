@@ -68,5 +68,20 @@ namespace Ministerio.Sqlite.Repositorio
             }
             return Enumerable.Empty<Informe>();
         }
+
+        public bool DeteleAll()
+        {
+            bool resultado = false;
+            try
+            {
+                con.DeleteAll<Informe>();
+                resultado = true;
+            }
+            catch (Exception ex)
+            {
+                EstadoMensaje = ex.Message;
+            }
+            return resultado;
+        }
     }
 }

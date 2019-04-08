@@ -55,5 +55,17 @@ namespace Ministerio.Servicio
             }
             Informes.Remove(oInformEliminar);
         }
+
+        public void DeleteAll()
+        {
+            if (!InformeRepositorio.Instancia.DeteleAll())
+            {
+                DependencyService.Get<IMessage>().LongToast(InformeRepositorio.Instancia.EstadoMensaje);
+            }
+            else
+            {
+                DependencyService.Get<IMessage>().LongToast("Eliminación Exitosa");
+            }
+        }
     }
 }

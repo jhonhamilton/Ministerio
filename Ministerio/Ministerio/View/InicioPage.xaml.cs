@@ -1,5 +1,6 @@
 ﻿using BottomBar.XamarinForms;
 using Ministerio.View.Paginas;
+using Ministerio.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
@@ -12,20 +13,20 @@ namespace Ministerio.View
     {
         public InicioPage()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
 
         protected override void OnCurrentPageChanged()
         {
-            base.OnCurrentPageChanged();            
+            base.OnCurrentPageChanged();
             if (CurrentPage is InformeAllPage page)
             {
-                Title = "Informes";
+                Title = "Informes";                
             }
             else
             {
                 Title = "Inicio";
-            }
+            }            
         }
     }
 }

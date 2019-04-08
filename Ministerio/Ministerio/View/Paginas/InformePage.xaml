@@ -5,9 +5,9 @@
              x:Class="Ministerio.View.Paginas.InformePage" 
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="Inicio" BackgroundColor="White">
-    <ScrollView BindingContext="{Binding InformeView}">
+    <ScrollView BindingContext="{Binding InformeView}" BackgroundColor="{Binding FondoAtras}">
         <AbsoluteLayout>
-            <StackLayout Orientation="Vertical" VerticalOptions="Start" BackgroundColor="{Binding FondoAtras}" Opacity="{Binding FondoOpacity}" Padding="5" 
+            <StackLayout Orientation="Vertical" VerticalOptions="Start" Padding="5"  Opacity="{Binding FondoOpacity}"
                              AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -60,7 +60,7 @@
                             <Grid>
                                 <TableView Intent="Menu">
                                     <TableRoot>
-                                        <TableSection Title="Lleva hasta ahora" AbsoluteLayout.LayoutFlags="PositionProportional">
+                                        <TableSection Title="Mi Informe" AbsoluteLayout.LayoutFlags="PositionProportional">
                                             <ViewCell>
                                                 <Grid>
                                                     <Label Grid.Column="0" Text="Tiempo" 
@@ -109,11 +109,24 @@
                     </StackLayout>
                 </Grid>
             </StackLayout>
-            <fab:FloatingActionButtonView
+
+            <Frame IsVisible="{Binding IsMostrarModal}" 
+                       HorizontalOptions="CenterAndExpand" 
+                       Content="{Binding InformeModal}"
+                       Padding="5" 
+                       WidthRequest="320"
+                       BorderColor="Black" 
+                       OutlineColor="FloralWhite"
+                       AbsoluteLayout.LayoutBounds="1,1,1,1" 
+                       AbsoluteLayout.LayoutFlags="All"
+                        HasShadow="True">
+            </Frame>
+
+            <fab:FloatingActionButtonView IsVisible="{Binding IsMostrarFlotante}"
 				            ImageName="ic_add_white.png"
 				            x:Name="FloatingActionButtonAdd"
 				            ColorNormal="#2196F3"
-                            Command="{Binding AddFlotanteCommand}"
+                            Command="{Binding AddInformeCommand}"
 				            AbsoluteLayout.LayoutFlags="PositionProportional"
 				            AbsoluteLayout.LayoutBounds="1, 1, AutoSize, AutoSize"/>
             <!--<StackLayout Orientation="Vertical"
@@ -126,17 +139,7 @@
 				            AbsoluteLayout.LayoutBounds="1, 1, AutoSize, AutoSize"/>
                 </StackLayout>-->
 
-            <Frame IsVisible="{Binding IsMostrarModal}" 
-                       HorizontalOptions="CenterAndExpand" 
-                       Content="{Binding InformeModal}"
-                       Padding="5" 
-                       WidthRequest="290"
-                       BorderColor="Black" 
-                       OutlineColor="FloralWhite"
-                       AbsoluteLayout.LayoutBounds="1,1,1,1" 
-                       AbsoluteLayout.LayoutFlags="All"
-                        HasShadow="True">
-            </Frame>
+            
         </AbsoluteLayout>
 
     </ScrollView>
