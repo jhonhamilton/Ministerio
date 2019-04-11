@@ -3,10 +3,13 @@ using Ministerio.Modals;
 using Ministerio.Model;
 using Ministerio.Servicio;
 using Ministerio.Sqlite.Entidades;
+using Ministerio.View.Popups;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Ministerio.ViewModel
@@ -14,7 +17,7 @@ namespace Ministerio.ViewModel
     public class InformeViewModel : InformeModel
     {
         #region Atributos Modal
-        private string _tiempoBinding;
+        private string _tiempoBinding = "00:00:00";
         private string _revistasBinding = "";
         private string _folletosBinding = "";
         private string _librosBinding = "";
@@ -250,7 +253,8 @@ namespace Ministerio.ViewModel
         void LimpiarCamposGuardar()
         {
             this.FolletosBinding = "";
-            this.TiempoBinding = "";
+            //this.TiempoBinding = "";
+            this.TiempoBinding = "00:00:00";
             this.TratadosBinding = "";
             this.LibrosBinding = "";
             this.RevistasBinding = "";
@@ -286,6 +290,28 @@ namespace Ministerio.ViewModel
             Tratados = oTratados;
             CursosBiblicos = oCursosBiblicos;
             Publicaciones = (Folletos + Revistas + Libros + Tratados);
+        }
+        public ICommand CompartirCommand
+        {
+            get
+            {
+                return new Command(Compartir, () => !IsLoad);
+            }
+        }
+        private async void Compartir()
+        {
+            string miInforme = "Envio mi Informe \n\n";
+            miInforme += "Horas: " + Tiempo.Split(':')[0].ToString() + " \n";
+            miInforme += "Publicaciones: " + Publicaciones.ToString() + " \n";
+            miInforme += "Videos: " + Videos.ToString() + " \n";
+            miInforme += "Revisitas: " + Revisitas.ToString() + " \n";
+            miInforme += "Cursos Biblicos: " + CursosBiblicos.ToString();
+            await Share.RequestAsync(new ShareTextRequest
+            {
+                Subject = "Informe - Ministerio",                
+                Text = miInforme,
+                Title = "Ministerio!"
+            });
         }
         public ICommand PlayCommand
         {
@@ -324,11 +350,19 @@ namespace Ministerio.ViewModel
         }
         private void AddInforme()
         {
-            IsMostrarModal = true;
-            IsMostrarFlotante = false;
-            FondoAtras = Color.Gray;
-            FondoOpacity = "0.7";
-            InformeModal = new InformeModalPage().CargarModalInforme();
+            //IsMostrarModal = true;
+            //IsMostrarFlotante = false;
+            //FondoAtras = Color.Gray;
+            //FondoOpacity = "0.7";
+            //InformeModal = new InformeModalPage().CargarModalInforme();
+            MainViewModel.GetInstance().Popups = new AddInformeViewModel(this.TiempoBinding, this.RevisitasBinding, 
+                this.FolletosBinding, this.LibrosBinding, this.TratadosBinding, this.VideosBinding, 
+                this.RevistasBinding, this.CursosBiblicosBinding);
+            var addInforme = new AddInformeView();
+            //addInforme.CallbackEvent += (object sender, object e) => ListarRegistro(); LimpiarCamposGuardar();
+            addInforme.CallbackEvent += (object sender, object e) => ListarRegistro();
+            addInforme.CancelCallbackEvent += (object sender, object e) => LimpiarCamposGuardar();
+            PopupNavigation.Instance.PushAsync(addInforme, true);
         }
         private void Play()
         {
@@ -379,12 +413,17 @@ namespace Ministerio.ViewModel
                         Minutos = Minutos % 60;
                     }
                 }
-                IsMostrarModal = true;
-                IsMostrarFlotante = false;
-                FondoAtras = Color.Gray;
-                FondoOpacity = "0.7";
+                //IsMostrarModal = true;
+                //IsMostrarFlotante = false;
+                //FondoAtras = Color.Gray;
+                //FondoOpacity = "0.7";
                 TiempoBinding = (Horas + ":" + Minutos + ":" + Segundos);
-                InformeModal = new InformeModalPage().CargarModalInforme();
+                //InformeModal = new InformeModalPage().CargarModalInforme();
+                //MainViewModel.GetInstance().Popups = new AddInformeViewModel(this.TiempoBinding, this.RevisitasBinding, 
+                //    this.FolletosBinding, this.LibrosBinding, this.TratadosBinding, this.VideosBinding, 
+                //    this.RevistasBinding, this.CursosBiblicosBinding);
+                //PopupNavigation.Instance.PushAsync(new AddInformeView());
+                AddInforme();
                 OTiempo = "00:00:00";
                 TiempoInicial = "";
             }

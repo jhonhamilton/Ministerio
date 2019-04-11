@@ -46,8 +46,16 @@ namespace Ministerio.Sqlite.Repositorio
             int resultado = 0;
             try
             {
-                resultado = con.Insert(informe);
-                EstadoMensaje = string.Format("Informe agregado!!!");
+                if (informe.Hora == 0 && informe.Minutos == 0 && informe.Segundos == 0 && informe.Videos == 0 && informe.TratadosArticulos == 0 && informe.Revistas == 0
+                    && informe.Revisitas == 0 && informe.Libros == 0 && informe.Folletos == 0 && informe.CursosBiblicos == 0)
+                {
+                    EstadoMensaje = string.Format("No hay nada para guardar");
+                }
+                else
+                {
+                    resultado = con.Insert(informe);
+                    EstadoMensaje = string.Format("Informe guardado!!!");
+                }
             }
             catch (Exception ex)
             {

@@ -9,6 +9,7 @@ namespace Ministerio.ViewModel
     {
         public InformeViewModel InformeView { get; set; }
         public InformeAllViewModel InformeAlls { get; set; }
+        public AddInformeViewModel Popups { get; set; }
         public ObservableCollection<MenuItemViewModel> Menu { get; set; }
         public MainViewModel()
         {

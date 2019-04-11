@@ -1,4 +1,5 @@
-﻿using Ministerio.Model;
+﻿using Ministerio.Interfaces;
+using Ministerio.Model;
 using Ministerio.Servicio;
 using Ministerio.Sqlite.Entidades;
 using System.Collections.Generic;
@@ -150,8 +151,9 @@ namespace Ministerio.ViewModel
         }
 
         private void RefreshData()
-        {
-            Meses = Listar();            
+        {            
+            Meses = Listar();
+            DependencyService.Get<IMessage>().LongToast("Lista Actualizada");
         }
         public void OnPropertyChanged([CallerMemberName]string NombrePropiedad = "")
         {

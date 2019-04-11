@@ -58,8 +58,8 @@
                     <StackLayout Opacity="{Binding FondoOpacity}" Grid.Row="1">
                         <Frame Padding="5" WidthRequest="267" HorizontalOptions="CenterAndExpand" HasShadow="True" BorderColor="Black" OutlineColor="FloralWhite" HeightRequest="274">
                             <Grid>
-                                <TableView Intent="Menu">
-                                    <TableRoot>
+                                <TableView Intent="Menu">                                    
+                                    <TableRoot>                                        
                                         <TableSection Title="Mi Informe" AbsoluteLayout.LayoutFlags="PositionProportional">
                                             <ViewCell>
                                                 <Grid>
@@ -110,7 +110,8 @@
                 </Grid>
             </StackLayout>
 
-            <Frame IsVisible="{Binding IsMostrarModal}" 
+            <!--<StackLayout IsVisible="{Binding IsMostrarModal}" Padding="5" AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All">
+                <Frame 
                        HorizontalOptions="CenterAndExpand" 
                        Content="{Binding InformeModal}"
                        Padding="5" 
@@ -119,8 +120,16 @@
                        OutlineColor="FloralWhite"
                        AbsoluteLayout.LayoutBounds="1,1,1,1" 
                        AbsoluteLayout.LayoutFlags="All"
-                        HasShadow="True">
-            </Frame>
+                        HasShadow="True" />
+            </StackLayout>-->
+
+            <fab:FloatingActionButtonView IsVisible="{Binding IsMostrarFlotante}"
+				            ImageName="ic_Share.png"
+				            x:Name="FloatingActionButtonCompartir"                            
+				            ColorNormal="#2196F3"
+                            Command="{Binding CompartirCommand}"
+				            AbsoluteLayout.LayoutFlags="PositionProportional"
+				            AbsoluteLayout.LayoutBounds="1, 0.835, AutoSize, AutoSize"/>
 
             <fab:FloatingActionButtonView IsVisible="{Binding IsMostrarFlotante}"
 				            ImageName="ic_add_white.png"
@@ -129,6 +138,7 @@
                             Command="{Binding AddInformeCommand}"
 				            AbsoluteLayout.LayoutFlags="PositionProportional"
 				            AbsoluteLayout.LayoutBounds="1, 1, AutoSize, AutoSize"/>
+
             <!--<StackLayout Orientation="Vertical"
                          VerticalOptions="End">
                     <fab:FloatingActionButtonView
