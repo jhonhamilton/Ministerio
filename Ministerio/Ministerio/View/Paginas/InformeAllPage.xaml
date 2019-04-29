@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"             
              x:Class="Ministerio.View.Paginas.InformeAllPage"
+             xmlns:personalizado="clr-namespace:Ministerio.Renderers"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="Informes" BackgroundColor="White">
     <ContentPage.Content>
@@ -10,82 +11,115 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" FontSize="30" Text="Informe Anual" HorizontalOptions="Center" VerticalOptions="Center" />
+            <Label Grid.Row="0" FontSize="30" Text="Año de Servicio" HorizontalOptions="Center" VerticalOptions="Center" />
             <ScrollView Grid.Row="1" BindingContext="{Binding InformeAlls}">
                 <StackLayout Padding="20">
                     <ListView IsRefreshing="{Binding IsRefreshing}" RefreshCommand="{Binding RefreshCommand}" IsPullToRefreshEnabled="True"
-                    ItemsSource="{Binding Meses}" 
-                    CachingStrategy="RecycleElement" 
+                    ItemsSource="{Binding Meses}"                    
+                    SelectedItem="{Binding SelectedMes}"
                     HasUnevenRows="True">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <ViewCell>
+                                <personalizado:ExtendedViewCell UnSelectedBackgroundColor="Transparent" SelectedBackgroundColor="White">
+                                    <Grid RowSpacing="1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <Label Grid.Row="0" Text="{Binding Nombre}" HorizontalTextAlignment="Start" FontSize="25" />
+                                        <Frame Grid.Row="1" Padding="5" HeightRequest="25">
+                                            <Grid>
+                                                <Label Grid.Column="0" Text="Tiempo" TextColor="Black"/>
+                                                <Label Grid.Column="1" HorizontalTextAlignment="End" TextColor="Black" Text="{Binding Tiempo}"/>
+                                            </Grid>
+                                        </Frame>
+                                        <Frame Grid.Row="2" Padding="5" HeightRequest="25">
+                                            <Grid>
+                                                <Label Grid.Column="0" Text="Publicaciones" TextColor="Black"/>
+                                                <Label Grid.Column="1" HorizontalTextAlignment="End" TextColor="Black" Text="{Binding Publicaciones}"/>
+                                            </Grid>
+                                        </Frame>
+                                        <Frame Grid.Row="3" Padding="5" HeightRequest="25">
+                                            <Grid>
+                                                <Label Grid.Column="0" Text="Revisitas" TextColor="Black"/>
+                                                <Label Grid.Column="1" HorizontalTextAlignment="End" TextColor="Black" Text="{Binding Revisitas}"/>
+                                            </Grid>
+                                        </Frame>
+                                        <Frame Grid.Row="4" Padding="5" HeightRequest="25">
+                                            <Grid>
+                                                <Label Grid.Column="0" Text="Curos Biblicos" TextColor="Black"/>
+                                                <Label Grid.Column="1" HorizontalTextAlignment="End" TextColor="Black" Text="{Binding CursosBiblicos}"/>
+                                            </Grid>
+                                        </Frame>
+                                        <Frame Grid.Row="5" Padding="5" HeightRequest="25">
+                                            <Grid>
+                                                <Label Grid.Column="0" Text="Videos" TextColor="Black"/>
+                                                <Label Grid.Column="1" HorizontalTextAlignment="End" TextColor="Black" Text="{Binding Videos}"/>
+                                            </Grid>
+                                        </Frame>
+                                    </Grid>
+                                </personalizado:ExtendedViewCell>
+                                <!--<personalizado:ExtendedViewCell UnSelectedBackgroundColor="Transparent" SelectedBackgroundColor="White">
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="auto"/>
                                             <RowDefinition Height="*"/>
                                         </Grid.RowDefinitions>
-                                        <StackLayout Grid.Row="0" HorizontalOptions="End">
-                                            <Label Text="{Binding Nombre}" TextColor="Black" />
+                                        <StackLayout Grid.Row="0" Grid.Column="0" HorizontalOptions="Start">
+                                            <Label Text="{Binding Nombre}" HorizontalOptions="Fill" HorizontalTextAlignment="End" FontSize="25" />
                                         </StackLayout>
-                                        <StackLayout Grid.Row="1" HorizontalOptions="StartAndExpand">
-                                            <StackLayout>
-                                                <Grid>
-                                                    <Label Grid.Column="0" VerticalOptions="Center" TextColor="DeepPink">
-                                                        <Label.FormattedText>
-                                                            <FormattedString>
-                                                                <Span Text="Horas: "/>
-                                                                <Span Text="{Binding Tiempo}"/>
-                                                            </FormattedString>
-                                                        </Label.FormattedText>
-                                                    </Label>
-
-                                                    <Label Grid.Column="1" VerticalOptions="Center" TextColor="DeepPink">
-                                                        <Label.FormattedText>
-                                                            <FormattedString>
-                                                                <Span Text="Cursos Biblico: "/>
-                                                                <Span Text="{Binding CursosBiblicos}"/>
-                                                            </FormattedString>
-                                                        </Label.FormattedText>
-                                                    </Label>
-                                                </Grid>
-                                            </StackLayout>
-                                            <StackLayout>
-                                                <Grid>
-                                                    <Label Grid.Column="0" VerticalOptions="Center" TextColor="DeepPink">
-                                                        <Label.FormattedText>
-                                                            <FormattedString>
-                                                                <Span Text="Publicaciones: "/>
-                                                                <Span Text="{Binding Publicaciones}"/>
-                                                            </FormattedString>
-                                                        </Label.FormattedText>
-                                                    </Label>
-
-                                                    <Label Grid.Column="1" VerticalOptions="Center" TextColor="DeepPink">
-                                                        <Label.FormattedText>
-                                                            <FormattedString>
-                                                                <Span Text="Videos: "/>
-                                                                <Span Text="{Binding Videos}"/>
-                                                            </FormattedString>
-                                                        </Label.FormattedText>
-                                                    </Label>
-                                                </Grid>
-                                            </StackLayout>
-                                            <StackLayout>
-                                                <Grid>
-                                                    <Label Grid.Column="0" VerticalOptions="Center" TextColor="DeepPink">
-                                                        <Label.FormattedText>
-                                                            <FormattedString>
-                                                                <Span Text="Revisitas: "/>
-                                                                <Span Text="{Binding Revisitas}"/>
-                                                            </FormattedString>
-                                                        </Label.FormattedText>
-                                                    </Label>
-                                                </Grid>
-                                            </StackLayout>
+                                        <StackLayout Grid.Row="1" Grid.Column="0" IsVisible="True" HorizontalOptions="StartAndExpand" HeightRequest="274" Padding="5">
+                                            <Grid>
+                                                <TableView Intent="Settings" VerticalOptions="Start">
+                                                    <TableView.Root>
+                                                        <TableSection Title="Mi Informe">
+                                                            <ViewCell>
+                                                                <Grid>
+                                                                    <Label Grid.Column="0" Text="Tiempo" 
+                                                           VerticalOptions="Center" TextColor="Black"/>
+                                                                    <Label Grid.Column="1" HorizontalOptions="EndAndExpand" 
+                                                           VerticalOptions="Center" TextColor="Black" Text="{Binding Tiempo}"/>
+                                                                </Grid>
+                                                            </ViewCell>
+                                                            <ViewCell>
+                                                                <Grid>
+                                                                    <Label Grid.Column="0" Text="Publicaciones" 
+                                                           VerticalOptions="Center" TextColor="Black"/>
+                                                                    <Label Grid.Column="1" HorizontalOptions="EndAndExpand" 
+                                                           VerticalOptions="Center" TextColor="Black" Text="{Binding Publicaciones}"/>
+                                                                </Grid>
+                                                            </ViewCell>
+                                                            <ViewCell>
+                                                                <Grid>
+                                                                    <Label Grid.Column="0" Text="Revisitas" 
+                                                           VerticalOptions="Center" TextColor="Black"/>
+                                                                    <Label Grid.Column="1" HorizontalOptions="EndAndExpand" 
+                                                           VerticalOptions="Center" TextColor="Black" Text="{Binding Revisitas}"/>
+                                                                </Grid>
+                                                            </ViewCell>
+                                                            <ViewCell>
+                                                                <Grid>
+                                                                    <Label Grid.Column="0" Text="Curos Biblicos" 
+                                                           VerticalOptions="Center" TextColor="Black"/>
+                                                                    <Label Grid.Column="1" HorizontalOptions="EndAndExpand" 
+                                                           VerticalOptions="Center" TextColor="Black" Text="{Binding CursosBiblicos}"/>
+                                                                </Grid>
+                                                            </ViewCell>
+                                                            <ViewCell>
+                                                                <Grid>
+                                                                    <Label Grid.Column="0" Text="Videos" 
+                                                           VerticalOptions="Center" TextColor="Black"/>
+                                                                    <Label Grid.Column="1" HorizontalOptions="EndAndExpand" 
+                                                           VerticalOptions="Center" TextColor="Black" Text="{Binding Videos}"/>
+                                                                </Grid>
+                                                            </ViewCell>
+                                                        </TableSection>
+                                                    </TableView.Root>
+                                                </TableView>
+                                            </Grid>
                                         </StackLayout>
-                                    </Grid>
-                                </ViewCell>
+                                    </Grid>                                    
+                                </personalizado:ExtendedViewCell>-->
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>

@@ -210,7 +210,6 @@ namespace Ministerio.ViewModel
         #endregion
 
         #region Instancias
-        InformeServicio servicio = new InformeServicio();
         Stopwatch mStopWatch = new Stopwatch();
         #endregion
 
@@ -243,7 +242,7 @@ namespace Ministerio.ViewModel
                 Folletos = (this.FolletosBinding != "" ? Convert.ToInt32(this.FolletosBinding) : 0),
                 Fecha = DateTime.Now
             };
-            servicio.Guardar(oMiInforme);
+            new InformeServicio().Guardar(oMiInforme);
             ListarRegistro();
             await Task.Delay(500);
             Cancelar();
@@ -264,7 +263,7 @@ namespace Ministerio.ViewModel
         }
         private void ListarRegistro()
         {
-            var Informes = servicio.Consultar();
+            var Informes = new InformeServicio().Consultar();
             int oHoras = 0, oMinutos = 0, oSegundos = 0, oFolletos = 0, oRevisitas = 0, oRevistas = 0, oVideos = 0, oLibros = 0, oCursosBiblicos = 0, oTratados = 0;
             string oTiempo = "";
             foreach (Informe item in Informes)
@@ -290,6 +289,8 @@ namespace Ministerio.ViewModel
             Tratados = oTratados;
             CursosBiblicos = oCursosBiblicos;
             Publicaciones = (Folletos + Revistas + Libros + Tratados);
+            MainViewModel.GetInstance().InformeAlls = null;
+            MainViewModel.GetInstance().InformeAlls = new InformeAllViewModel();
         }
         public ICommand CompartirCommand
         {
@@ -350,16 +351,10 @@ namespace Ministerio.ViewModel
         }
         private void AddInforme()
         {
-            //IsMostrarModal = true;
-            //IsMostrarFlotante = false;
-            //FondoAtras = Color.Gray;
-            //FondoOpacity = "0.7";
-            //InformeModal = new InformeModalPage().CargarModalInforme();
             MainViewModel.GetInstance().Popups = new AddInformeViewModel(this.TiempoBinding, this.RevisitasBinding, 
                 this.FolletosBinding, this.LibrosBinding, this.TratadosBinding, this.VideosBinding, 
                 this.RevistasBinding, this.CursosBiblicosBinding);
             var addInforme = new AddInformeView();
-            //addInforme.CallbackEvent += (object sender, object e) => ListarRegistro(); LimpiarCamposGuardar();
             addInforme.CallbackEvent += (object sender, object e) => ListarRegistro();
             addInforme.CancelCallbackEvent += (object sender, object e) => LimpiarCamposGuardar();
             PopupNavigation.Instance.PushAsync(addInforme, true);
@@ -438,13 +433,10 @@ namespace Ministerio.ViewModel
         }
         #endregion
 
-        
-        //DependencyService.Get<IMessage>().LongToast(ex.Message);
         #region Constructor
         public InformeViewModel()
         {
-            ListarRegistro();
-            MainViewModel.GetInstance().InformeAlls = new InformeAllViewModel();
+            ListarRegistro();            
         }
         #endregion
     }

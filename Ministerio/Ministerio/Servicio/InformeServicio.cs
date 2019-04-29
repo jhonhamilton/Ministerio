@@ -12,55 +12,33 @@ namespace Ministerio.Servicio
 {
     public class InformeServicio
     {
-        public List<Informe> Informes { get; set; }
+        private InformeRepositorio conext;
         public InformeServicio()
         {
-            if (Informes == null)
-            {
-                Informes = new List<Informe>();
-            }
+            this.conext = new InformeRepositorio();
         }
-
-        public IEnumerable<Informe> Consultar()
+        public ObservableCollection<Informe> Consultar()
         {
-            return InformeRepositorio.Instancia.ObtenerTodosInformes();
+            return this.conext.ObtenerTodosInformes();
         }
-
         public void Guardar(Informe informe)
         {
-            InformeRepositorio.Instancia.AgregarInforme(informe);
-            DependencyService.Get<IMessage>().LongToast(InformeRepositorio.Instancia.EstadoMensaje);
-            //DependencyService.Get<IMessage>().LongToast(InformeRepositorio.Instancia.estadoMensaje);
+            this.conext.AgregarInforme(informe);            
+            DependencyService.Get<IMessage>().LongToast(this.conext.EstadoMensaje);
         }
         public void Modificar(Informe informe)
         {
-            for (int i = 0; i < Informes.Count; i++)
-            {
-                if (Informes[i].Id == informe.Id)
-                {
-                    Informes[i] = informe;
-                }
-            }
+            this.conext.UpdateInforme(informe);
         }
-        public void Eliminar(int idInforme)
+        public void Eliminar(Informe informe)
         {
-            var oInformEliminar = new Informe();
-            for (int i = 0; i < Informes.Count; i++)
-            {
-                if (Informes[i].Id == idInforme)
-                {
-                    oInformEliminar = Informes[i];
-                    break;
-                }
-            }
-            Informes.Remove(oInformEliminar);
+            this.conext.DeleteInforme(informe);
         }
-
         public void DeleteAll()
         {
-            if (!InformeRepositorio.Instancia.DeteleAll())
+            if (!this.conext.DeteleAll())
             {
-                DependencyService.Get<IMessage>().LongToast(InformeRepositorio.Instancia.EstadoMensaje);
+                DependencyService.Get<IMessage>().LongToast(this.conext.EstadoMensaje);
             }
             else
             {

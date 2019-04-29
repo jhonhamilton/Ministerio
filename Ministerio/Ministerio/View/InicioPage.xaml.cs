@@ -13,20 +13,20 @@ namespace Ministerio.View
     {
         public InicioPage()
         {
-            InitializeComponent();            
+            InitializeComponent();
         }
-
+        
         protected override void OnCurrentPageChanged()
-        {
+        {            
             base.OnCurrentPageChanged();
-            if (CurrentPage is InformeAllPage page)
+            if (CurrentPage is InformeAllPage)
             {
-                Title = "Informes";                
+                Title = "Informes";
             }
             else
             {
                 Title = "Inicio";
-            }            
+            }
         }
     }
 }

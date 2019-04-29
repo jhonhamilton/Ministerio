@@ -18,7 +18,6 @@ namespace Ministerio.ViewModel
     public class AddInformeViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private InformeServicio servicio;
         #region Atributos Modal
         private string _tiempoBinding;
         private string _revistasBinding = "";
@@ -145,8 +144,6 @@ namespace Ministerio.ViewModel
         //        return Command(SumFolletos);
         //    }
         //}
-
-
         #endregion
         //private void RestRevistas(string parametro)
         //{
@@ -210,7 +207,7 @@ namespace Ministerio.ViewModel
                 Folletos = (this.FolletosBinding != "" ? Convert.ToInt32(this.FolletosBinding) : 0),
                 Fecha = DateTime.Now
             };
-            servicio.Guardar(oMiInforme);
+            new InformeServicio().Guardar(oMiInforme);
             await PopupNavigation.Instance.PopAllAsync();
         }
         public AddInformeViewModel(string tiempo, string revisitas, string folletos, string libros, string tratados, string videos, string revistas, string cursos)
@@ -223,7 +220,7 @@ namespace Ministerio.ViewModel
             this.VideosBinding = videos;
             this.RevistasBinding = revistas;
             this.CursosBiblicosBinding = cursos;
-            this.servicio = new InformeServicio();
+            //this.servicio = new InformeServicio();
         }
 
         public void OnPropertyChanged([CallerMemberName]string NombrePropiedad = "")

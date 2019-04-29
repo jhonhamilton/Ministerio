@@ -15,7 +15,7 @@ namespace Ministerio
         {
             InitializeComponent();
 
-            InformeRepositorio.Inicializador(filename);
+            //InformeRepositorio.Inicializador(filename);
             var mainViewModel = MainViewModel.GetInstance();
             mainViewModel.InformeView = new InformeViewModel();
             MainPage = new MasterPage();

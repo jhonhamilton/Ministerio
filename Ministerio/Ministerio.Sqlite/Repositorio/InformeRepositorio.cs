@@ -2,45 +2,23 @@
 using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
-using SQLitePCL;
+using Xamarin.Forms;
 
 namespace Ministerio.Sqlite.Repositorio
 {
-    public class InformeRepositorio
+    public class InformeRepositorio : IDisposable
     {
-        private SQLiteConnection con;
-        private static InformeRepositorio instancia;
-        public string EstadoMensaje;
-        public static InformeRepositorio Instancia
+        private SQLiteConnection connection;        
+        public string EstadoMensaje;        
+        public InformeRepositorio()
         {
-            get
-            {
-                if (instancia == null)
-                {
-                    throw new Exception("Debe llamar al inicializador");
-                }
-                return instancia;
-            }
-        }
-        public static void Inicializador(string filename)
-        {
-            if (filename == null)
-            {
-                throw new ArgumentException();
-            }
-            if (instancia != null)
-            {
-                instancia.con.Close();
-            }
-            instancia = new InformeRepositorio(filename);
-        }
-        private InformeRepositorio(string dbPath)
-        {
-            con = new SQLiteConnection(dbPath);
-            con.CreateTable<Informe>();
-        }
-        
+            var dataBasePath = DependencyService.Get<IConfig>().DataBasePath("Ministerio.db3");
+            connection = new SQLiteConnection(dataBasePath);
+            connection.CreateTable<Informe>();
+        }        
         public int AgregarInforme(Informe informe)
         {
             int resultado = 0;
@@ -53,7 +31,7 @@ namespace Ministerio.Sqlite.Repositorio
                 }
                 else
                 {
-                    resultado = con.Insert(informe);
+                    resultado = connection.Insert(informe);
                     EstadoMensaje = string.Format("Informe guardado!!!");
                 }
             }
@@ -63,26 +41,54 @@ namespace Ministerio.Sqlite.Repositorio
             }
             return resultado;
         }
-
-        public IEnumerable<Informe> ObtenerTodosInformes()
+        public int UpdateInforme(Informe informe)
         {
+            int resultado = 0;
             try
             {
-                return con.Table<Informe>();
+                resultado = connection.Update(informe);
+                EstadoMensaje = string.Format("Informe Actualizado!!!");
             }
             catch (Exception ex)
             {
                 EstadoMensaje = ex.Message;
             }
-            return Enumerable.Empty<Informe>();
+            return resultado;
         }
-
+        public ObservableCollection<Informe> ObtenerTodosInformes()
+        {
+            try
+            {
+                return new ObservableCollection<Informe>(connection.Table<Informe>().OrderBy(c => c.Fecha).ToList());
+            }
+            catch (Exception ex)
+            {
+                EstadoMensaje = ex.Message;
+            }
+            return new ObservableCollection<Informe>(Enumerable.Empty<Informe>().ToList());
+        }
+        public void DeleteInforme(Informe informe)
+        {
+            try
+            {
+                connection.Delete(informe);
+                EstadoMensaje = "Informe Eliminado";
+            }
+            catch (Exception ex)
+            {
+                EstadoMensaje = ex.Message;
+            }
+        }
+        public Informe GetInforme(int idInforme)
+        {
+            return connection.Table<Informe>().FirstOrDefault(c => c.Id == idInforme);
+        }
         public bool DeteleAll()
         {
             bool resultado = false;
             try
             {
-                con.DeleteAll<Informe>();
+                connection.DeleteAll<Informe>();
                 resultado = true;
             }
             catch (Exception ex)
@@ -90,6 +96,10 @@ namespace Ministerio.Sqlite.Repositorio
                 EstadoMensaje = ex.Message;
             }
             return resultado;
+        }
+        public void Dispose()
+        {
+            connection.Dispose();
         }
     }
 }

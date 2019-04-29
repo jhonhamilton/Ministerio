@@ -24,9 +24,10 @@ namespace Ministerio.iOS
         {
             Rg.Plugins.Popup.Popup.Init();
             global::Xamarin.Forms.Forms.Init();
-            string dbPath = FileAccess.GetLocalFilePath("Ministerio.db3");
-            LoadApplication(new App(dbPath));
-                        
+            //string dbPath = FileAccess.GetLocalFilePath("Ministerio.db3");
+            //LoadApplication(new App(dbPath));
+            LoadApplication(new App());
+
             return base.FinishedLaunching(app, options);
         }
     }
