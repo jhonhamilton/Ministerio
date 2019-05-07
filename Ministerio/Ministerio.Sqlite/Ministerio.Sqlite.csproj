@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="Entidades\Informe.cs" />
     <Compile Include="IConfig.cs" />
+    <Compile Include="Modelo\Informe.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositorio\InformeRepositorio.cs" />
   </ItemGroup>

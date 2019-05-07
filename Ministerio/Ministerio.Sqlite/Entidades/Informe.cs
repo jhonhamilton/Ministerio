@@ -8,7 +8,7 @@ namespace Ministerio.Sqlite.Entidades
     [Table("Informe")]
     public class Informe : INotifyPropertyChanged
     {
-        
+
         private int _Id;
         private int _Hora;
         private int _Minutos;

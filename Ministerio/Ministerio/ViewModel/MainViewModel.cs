@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
+﻿using System.Collections.ObjectModel;
 
 namespace Ministerio.ViewModel
 {
@@ -10,11 +7,11 @@ namespace Ministerio.ViewModel
         public InformeViewModel InformeView { get; set; }
         public InformeAllViewModel InformeAlls { get; set; }
         public AddInformeViewModel Popups { get; set; }
+        public ShowDayToDayViewModel ShowDayToDay { get; set; }
         public ObservableCollection<MenuItemViewModel> Menu { get; set; }
+        public App MyApp { get; set; }
         public MainViewModel()
         {
-            /*InformeView = new InformeViewModel()*/
-            ;
             instance = this;
             this.LoadMenu();
         }

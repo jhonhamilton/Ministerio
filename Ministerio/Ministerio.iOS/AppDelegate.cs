@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
+﻿
 using Foundation;
 using UIKit;
 
@@ -24,8 +21,6 @@ namespace Ministerio.iOS
         {
             Rg.Plugins.Popup.Popup.Init();
             global::Xamarin.Forms.Forms.Init();
-            //string dbPath = FileAccess.GetLocalFilePath("Ministerio.db3");
-            //LoadApplication(new App(dbPath));
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

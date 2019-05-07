@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"             
-             xmlns:fab="clr-namespace:Refractored.FabControl;assembly=Refractored.FabControl"
+             xmlns:fab="clr-namespace:Refractored.FabControl;assembly=Refractored.FabControl"             
              x:Class="Ministerio.View.Paginas.InformePage" 
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="Inicio" BackgroundColor="White">
@@ -57,16 +57,16 @@
                     </StackLayout>
                     <StackLayout Opacity="{Binding FondoOpacity}" Grid.Row="1">
                         <Frame Padding="5" WidthRequest="267" HorizontalOptions="CenterAndExpand" HasShadow="True" BorderColor="Black" OutlineColor="FloralWhite" HeightRequest="274">
-                            <Grid>
-                                <TableView Intent="Menu">                                    
-                                    <TableRoot>                                        
+                            <Grid>                                
+                                <TableView Intent="Menu">
+                                    <TableRoot>
                                         <TableSection Title="Mi Informe" AbsoluteLayout.LayoutFlags="PositionProportional">
                                             <ViewCell>
                                                 <Grid>
                                                     <Label Grid.Column="0" Text="Tiempo" 
                                                            VerticalOptions="Center" TextColor="Black"/>
                                                     <Label Grid.Column="1" HorizontalOptions="EndAndExpand" 
-                                                           VerticalOptions="Center" TextColor="Black" Text="{Binding Tiempo}"/>
+                                                           VerticalOptions="Center" TextColor="Black" Text="{Binding MiInforme.Tiempo, Mode=TwoWay}"/>
                                                 </Grid>
                                             </ViewCell>
                                             <ViewCell>
@@ -74,7 +74,7 @@
                                                     <Label Grid.Column="0" Text="Publicaciones" 
                                                            VerticalOptions="Center" TextColor="Black"/>
                                                     <Label Grid.Column="1" HorizontalOptions="EndAndExpand" 
-                                                           VerticalOptions="Center" TextColor="Black" Text="{Binding Publicaciones}"/>
+                                                           VerticalOptions="Center" TextColor="Black" Text="{Binding MiInforme.Publicaciones, Mode=TwoWay}"/>
                                                 </Grid>
                                             </ViewCell>
                                             <ViewCell>
@@ -82,7 +82,7 @@
                                                     <Label Grid.Column="0" Text="Revisitas" 
                                                            VerticalOptions="Center" TextColor="Black"/>
                                                     <Label Grid.Column="1" HorizontalOptions="EndAndExpand" 
-                                                           VerticalOptions="Center" TextColor="Black" Text="{Binding Revisitas}"/>
+                                                           VerticalOptions="Center" TextColor="Black" Text="{Binding MiInforme.Revisitas, Mode=TwoWay}"/>
                                                 </Grid>
                                             </ViewCell>
                                             <ViewCell>
@@ -90,7 +90,7 @@
                                                     <Label Grid.Column="0" Text="Curos Biblicos" 
                                                            VerticalOptions="Center" TextColor="Black"/>
                                                     <Label Grid.Column="1" HorizontalOptions="EndAndExpand" 
-                                                           VerticalOptions="Center" TextColor="Black" Text="{Binding CursosBiblicos}"/>
+                                                           VerticalOptions="Center" TextColor="Black" Text="{Binding MiInforme.CursosBiblicos, Mode=TwoWay}"/>
                                                 </Grid>
                                             </ViewCell>
                                             <ViewCell>
@@ -98,7 +98,7 @@
                                                     <Label Grid.Column="0" Text="Videos" 
                                                            VerticalOptions="Center" TextColor="Black"/>
                                                     <Label Grid.Column="1" HorizontalOptions="EndAndExpand" 
-                                                           VerticalOptions="Center" TextColor="Black" Text="{Binding Videos}"/>
+                                                           VerticalOptions="Center" TextColor="Black" Text="{Binding MiInforme.Videos, Mode=TwoWay}"/>
                                                 </Grid>
                                             </ViewCell>
                                         </TableSection>
@@ -109,19 +109,6 @@
                     </StackLayout>
                 </Grid>
             </StackLayout>
-
-            <!--<StackLayout IsVisible="{Binding IsMostrarModal}" Padding="5" AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All">
-                <Frame 
-                       HorizontalOptions="CenterAndExpand" 
-                       Content="{Binding InformeModal}"
-                       Padding="5" 
-                       WidthRequest="320"
-                       BorderColor="Black" 
-                       OutlineColor="FloralWhite"
-                       AbsoluteLayout.LayoutBounds="1,1,1,1" 
-                       AbsoluteLayout.LayoutFlags="All"
-                        HasShadow="True" />
-            </StackLayout>-->
 
             <fab:FloatingActionButtonView IsVisible="{Binding IsMostrarFlotante}"
 				            ImageName="ic_Share.png"
@@ -138,18 +125,6 @@
                             Command="{Binding AddInformeCommand}"
 				            AbsoluteLayout.LayoutFlags="PositionProportional"
 				            AbsoluteLayout.LayoutBounds="1, 1, AutoSize, AutoSize"/>
-
-            <!--<StackLayout Orientation="Vertical"
-                         VerticalOptions="End">
-                    <fab:FloatingActionButtonView
-				            ImageName="ic_add_white.png"
-				            x:Name="FloatingActionButtonAdd"
-				            ColorNormal="#2196F3"
-				            AbsoluteLayout.LayoutFlags="PositionProportional"
-				            AbsoluteLayout.LayoutBounds="1, 1, AutoSize, AutoSize"/>
-                </StackLayout>-->
-
-            
         </AbsoluteLayout>
 
     </ScrollView>

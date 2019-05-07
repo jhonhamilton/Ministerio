@@ -22,7 +22,6 @@
                  BackgroundColor="White"
                  HorizontalOptions="Center"
                  VerticalOptions="Center">
-        <!--<Label Text="Hello Xamarin.Forms!" />-->
         <ScrollView>
             <Grid>
                 <Grid.RowDefinitions>
@@ -66,73 +65,73 @@
 
                 <Image Grid.Row="2" Grid.Column="0" Source="Menos_ic_Res.png" WidthRequest="40">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding }" />
+                        <TapGestureRecognizer Command="{Binding ConteoFolletosCommand}" CommandParameter="R" />
                     </Image.GestureRecognizers>
                 </Image>
                 <Entry Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand" Placeholder="Folletos" Text="{Binding FolletosBinding}" />
                 <Image Grid.Row="2" Grid.Column="3" Source="Mas_ic_Sum.png" WidthRequest="40">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding }" />
+                        <TapGestureRecognizer Command="{Binding ConteoFolletosCommand}" CommandParameter="S" />
                     </Image.GestureRecognizers>
                 </Image>
 
                 <Image Grid.Row="3" Grid.Column="0" Source="Menos_ic_Res.png" WidthRequest="40">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding }" />
+                        <TapGestureRecognizer Command="{Binding ConteoLibrosCommand}" CommandParameter="R" />
                     </Image.GestureRecognizers>
                 </Image>
                 <Entry Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand" Placeholder="Libros" Text="{Binding LibrosBinding}" />
                 <Image Grid.Row="3" Grid.Column="3" Source="Mas_ic_Sum.png" WidthRequest="40">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding }" />
+                        <TapGestureRecognizer Command="{Binding ConteoLibrosCommand}" CommandParameter="S" />
                     </Image.GestureRecognizers>
                 </Image>
 
                 <Image Grid.Row="4" Grid.Column="0" Source="Menos_ic_Res.png" WidthRequest="40">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding }" />
+                        <TapGestureRecognizer Command="{Binding ConteoTratadosCommand}" CommandParameter="R" />
                     </Image.GestureRecognizers>
                 </Image>
                 <Entry Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand" Placeholder="Tratados y árticulos" Text="{Binding TratadosBinding}" />
                 <Image Grid.Row="4" Grid.Column="3" Source="Mas_ic_Sum.png" WidthRequest="40">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding }" />
+                        <TapGestureRecognizer Command="{Binding ConteoTratadosCommand}" CommandParameter="S" />
                     </Image.GestureRecognizers>
                 </Image>
 
                 <Image Grid.Row="5" Grid.Column="0" Source="Menos_ic_Res.png" WidthRequest="40">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding }" />
+                        <TapGestureRecognizer Command="{Binding ConteoVideosCommand}" CommandParameter="R" />
                     </Image.GestureRecognizers>
                 </Image>
                 <Entry Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand" Placeholder="Vídeos" Text="{Binding VideosBinding}" />
                 <Image Grid.Row="5" Grid.Column="3" Source="Mas_ic_Sum.png" WidthRequest="40">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding }" />
+                        <TapGestureRecognizer Command="{Binding ConteoVideosCommand}" CommandParameter="S" />
                     </Image.GestureRecognizers>
                 </Image>
 
                 <Image Grid.Row="6" Grid.Column="0" Source="Menos_ic_Res.png" WidthRequest="40">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding }" />
+                        <TapGestureRecognizer Command="{Binding ConteoRevisitasCommand}" CommandParameter="R" />
                     </Image.GestureRecognizers>
                 </Image>
                 <Entry Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand" Placeholder="Revisitas" Text="{Binding RevisitasBinding}" />
                 <Image Grid.Row="6" Grid.Column="3" Source="Mas_ic_Sum.png" WidthRequest="40">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding }" />
+                        <TapGestureRecognizer Command="{Binding ConteoRevisitasCommand}" CommandParameter="S" />
                     </Image.GestureRecognizers>
                 </Image>
 
                 <Image Grid.Row="7" Grid.Column="0" Source="Menos_ic_Res.png" WidthRequest="40">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding }" />
+                        <TapGestureRecognizer Command="{Binding ConteoCursosBiblicosCommand}" CommandParameter="R" />
                     </Image.GestureRecognizers>
                 </Image>
                 <Entry Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand" Placeholder="Cursos bíblicos" Text="{Binding CursosBiblicosBinding}" />
                 <Image Grid.Row="7" Grid.Column="3" Source="Mas_ic_Sum.png" WidthRequest="40">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding }" />
+                        <TapGestureRecognizer Command="{Binding ConteoCursosBiblicosCommand}" CommandParameter="S" />
                     </Image.GestureRecognizers>
                 </Image>
 

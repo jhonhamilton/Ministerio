@@ -1,5 +1,4 @@
-﻿using System;
-using Android.Views;
+﻿using Android.Views;
 
 namespace Ministerio.Droid.BottomBar.Utils
 {

@@ -5,9 +5,8 @@
              xmlns:xxf="clr-namespace:Ministerio.BottomBar"
              xmlns:page="clr-namespace:Ministerio.View.Paginas"
              x:Class="Ministerio.View.InicioPage">  
-  <!--Pages can be added as references or inline-->
 
-  <page:InformePage Title="Inicio" Icon="ic_action_home.png"/>    
+  <page:InformePage Title="Inicio" Icon="ic_action_home.png"/>
   <page:InformeAllPage 
     Title="Informe" Icon="ic_action_assignment.png"
     xf:BottomBarPageExtensions.TabColor="#F323ff"

@@ -1,13 +1,10 @@
-﻿using Ministerio.Interfaces;
-using Ministerio.Modals;
-using Ministerio.Model;
+﻿using Ministerio.Model;
 using Ministerio.Servicio;
 using Ministerio.Sqlite.Entidades;
 using Ministerio.View.Popups;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -25,9 +22,19 @@ namespace Ministerio.ViewModel
         private string _videosBinding = "";
         private string _revisitasBinding = "";
         private string _cursosBiblicosBinding = "";
+        private MiInforme _miInforme = new MiInforme();
         #endregion
 
         #region Propiedades Modal
+        public MiInforme MiInforme
+        {
+            get { return _miInforme; }
+            set
+            {
+                _miInforme = value;
+                OnPropertyChanged();
+            }
+        }
         public string TiempoBinding
         {
             get { return _tiempoBinding; }
@@ -113,7 +120,7 @@ namespace Ministerio.ViewModel
         private bool pausado = false;
         private Color _fondoAtras = Color.White;
         private string _fondoOpacity = "1";
-        private Frame _informeModal = null;
+        private TableView _informeModal = null;
         #endregion
 
         #region Propiedades Informe
@@ -126,7 +133,7 @@ namespace Ministerio.ViewModel
                 OnPropertyChanged();
             }
         }
-        public Frame InformeModal
+        public TableView InformeModal
         {
             get { return _informeModal; }
             set
@@ -214,41 +221,6 @@ namespace Ministerio.ViewModel
         #endregion
 
         #region Metodos
-        public ICommand GuardarCommand
-        {
-            get
-            {
-                return new Command(async () => await Guardar(), () => !IsLoad);
-            }
-        }
-        private async Task Guardar()
-        {
-            IsLoad = true;
-            if (TiempoBinding == null)
-            {
-                TiempoBinding = "00:00:00";
-            }
-            var oMiInforme = new Informe
-            {
-                Hora = Convert.ToInt32(this.TiempoBinding.Split(':')[0]),
-                Minutos = Convert.ToInt32(this.TiempoBinding.Split(':')[1]),
-                Segundos = Convert.ToInt32(this.TiempoBinding.Split(':')[2]),
-                Libros = (this.LibrosBinding != "" ? Convert.ToInt32(this.LibrosBinding.ToString()) : 0),
-                Revisitas = (this.RevisitasBinding != "" ? Convert.ToInt32(this.RevisitasBinding) : 0),
-                Revistas = (this.RevistasBinding != "" ? Convert.ToInt32(this.RevistasBinding) : 0),
-                CursosBiblicos = (this.CursosBiblicosBinding != "" ? Convert.ToInt32(this.CursosBiblicosBinding) : 0),
-                Videos = (this.VideosBinding != "" ? Convert.ToInt32(this.VideosBinding) : 0),
-                TratadosArticulos = (this.TratadosBinding != "" ? Convert.ToInt32(this.TratadosBinding) : 0),
-                Folletos = (this.FolletosBinding != "" ? Convert.ToInt32(this.FolletosBinding) : 0),
-                Fecha = DateTime.Now
-            };
-            new InformeServicio().Guardar(oMiInforme);
-            ListarRegistro();
-            await Task.Delay(500);
-            Cancelar();
-            //DependencyService.Get<IMessage>().ShortToast("Añadido al Informe");
-            IsLoad = false;
-        }
         void LimpiarCamposGuardar()
         {
             this.FolletosBinding = "";
@@ -261,17 +233,17 @@ namespace Ministerio.ViewModel
             this.CursosBiblicosBinding = "";
             this.VideosBinding = "";
         }
-        private void ListarRegistro()
+        public void ListarRegistro()
         {
             var Informes = new InformeServicio().Consultar();
+            //var Informes = new InformeRepositorio().ObtenerTodosInformes();
             int oHoras = 0, oMinutos = 0, oSegundos = 0, oFolletos = 0, oRevisitas = 0, oRevistas = 0, oVideos = 0, oLibros = 0, oCursosBiblicos = 0, oTratados = 0;
             string oTiempo = "";
             foreach (Informe item in Informes)
             {
                 oHoras += item.Hora;
                 oMinutos += item.Minutos;
-                oSegundos += item.Segundos;
-                oTiempo = (oHoras + ":" + oMinutos + ":" + oSegundos);
+                oSegundos += item.Segundos;                
                 oFolletos += item.Folletos;
                 oRevisitas += item.Revisitas;
                 oRevistas += item.Revistas;
@@ -280,15 +252,9 @@ namespace Ministerio.ViewModel
                 oCursosBiblicos += item.CursosBiblicos;
                 oTratados += item.TratadosArticulos;
             }
-            Tiempo = (oTiempo == "" ? "00:00:00" : oTiempo);
-            Folletos = oFolletos;
-            Revistas = oRevistas;
-            Revisitas = oRevisitas;
-            Libros = oLibros;
-            Videos = oVideos;
-            Tratados = oTratados;
-            CursosBiblicos = oCursosBiblicos;
-            Publicaciones = (Folletos + Revistas + Libros + Tratados);
+            oTiempo = (oHoras + ":" + oMinutos + ":" + oSegundos);
+            MiInforme = new MiInforme((oTiempo == "" ? "00:00:00" : oTiempo), oRevisitas, oVideos, 
+                (oFolletos + oRevistas + oLibros + oTratados), oCursosBiblicos);
             MainViewModel.GetInstance().InformeAlls = null;
             MainViewModel.GetInstance().InformeAlls = new InformeAllViewModel();
         }
@@ -302,11 +268,11 @@ namespace Ministerio.ViewModel
         private async void Compartir()
         {
             string miInforme = "Envio mi Informe \n\n";
-            miInforme += "Horas: " + Tiempo.Split(':')[0].ToString() + " \n";
-            miInforme += "Publicaciones: " + Publicaciones.ToString() + " \n";
-            miInforme += "Videos: " + Videos.ToString() + " \n";
-            miInforme += "Revisitas: " + Revisitas.ToString() + " \n";
-            miInforme += "Cursos Biblicos: " + CursosBiblicos.ToString();
+            miInforme += "Horas: " + MiInforme.Tiempo.Split(':')[0].ToString() + " \n";
+            miInforme += "Publicaciones: " + MiInforme.Publicaciones.ToString() + " \n";
+            miInforme += "Videos: " + MiInforme.Videos.ToString() + " \n";
+            miInforme += "Revisitas: " + MiInforme.Revisitas.ToString() + " \n";
+            miInforme += "Cursos Biblicos: " + MiInforme.CursosBiblicos.ToString();
             await Share.RequestAsync(new ShareTextRequest
             {
                 Subject = "Informe - Ministerio",                
@@ -321,44 +287,6 @@ namespace Ministerio.ViewModel
                 return new Command(Play, () => !IsLoad);
             }
         }
-        public ICommand PausarCommand
-        {
-            get
-            {
-                return new Command(Pausar, () => !IsLoad);
-            }
-        }
-        public ICommand StopCommand
-        {
-            get
-            {
-                return new Command(Detener, () => !IsLoad);
-            }
-        }
-        public ICommand CancelarCommand
-        {
-            get
-            {
-                return new Command(Cancelar, () => !IsLoad);
-            }
-        }
-        public ICommand AddInformeCommand
-        {
-            get
-            {
-                return new Command(AddInforme, () => !IsLoad);
-            }
-        }
-        private void AddInforme()
-        {
-            MainViewModel.GetInstance().Popups = new AddInformeViewModel(this.TiempoBinding, this.RevisitasBinding, 
-                this.FolletosBinding, this.LibrosBinding, this.TratadosBinding, this.VideosBinding, 
-                this.RevistasBinding, this.CursosBiblicosBinding);
-            var addInforme = new AddInformeView();
-            addInforme.CallbackEvent += (object sender, object e) => ListarRegistro();
-            addInforme.CancelCallbackEvent += (object sender, object e) => LimpiarCamposGuardar();
-            PopupNavigation.Instance.PushAsync(addInforme, true);
-        }
         private void Play()
         {
             IsOcultar = false;
@@ -370,14 +298,16 @@ namespace Ministerio.ViewModel
             mStopWatch.Start();
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
-                //if (!IsOcultar)
-                //{
-                //    mStopWatch.Start();
-                //    OTiempo = string.Format("{0:hh\\:mm\\:ss}", mStopWatch.Elapsed);
-                //}
                 OTiempo = string.Format("{0:hh\\:mm\\:ss}", mStopWatch.Elapsed);
                 return mStopWatch.IsRunning;
             });
+        }
+        public ICommand PausarCommand
+        {
+            get
+            {
+                return new Command(Pausar, () => !IsLoad);
+            }
         }
         private void Pausar()
         {
@@ -386,6 +316,13 @@ namespace Ministerio.ViewModel
             IsOcultar = true;
             IsMostrar = false;
             pausado = true;
+        }
+        public ICommand StopCommand
+        {
+            get
+            {
+                return new Command(Detener, () => !IsLoad);
+            }
         }
         private void Detener()
         {
@@ -408,19 +345,17 @@ namespace Ministerio.ViewModel
                         Minutos = Minutos % 60;
                     }
                 }
-                //IsMostrarModal = true;
-                //IsMostrarFlotante = false;
-                //FondoAtras = Color.Gray;
-                //FondoOpacity = "0.7";
                 TiempoBinding = (Horas + ":" + Minutos + ":" + Segundos);
-                //InformeModal = new InformeModalPage().CargarModalInforme();
-                //MainViewModel.GetInstance().Popups = new AddInformeViewModel(this.TiempoBinding, this.RevisitasBinding, 
-                //    this.FolletosBinding, this.LibrosBinding, this.TratadosBinding, this.VideosBinding, 
-                //    this.RevistasBinding, this.CursosBiblicosBinding);
-                //PopupNavigation.Instance.PushAsync(new AddInformeView());
                 AddInforme();
                 OTiempo = "00:00:00";
                 TiempoInicial = "";
+            }
+        }
+        public ICommand CancelarCommand
+        {
+            get
+            {
+                return new Command(Cancelar, () => !IsLoad);
             }
         }
         private void Cancelar()
@@ -431,11 +366,29 @@ namespace Ministerio.ViewModel
             FondoOpacity = "1";
             LimpiarCamposGuardar();
         }
+        public ICommand AddInformeCommand
+        {
+            get
+            {
+                return new Command(AddInforme, () => !IsLoad);
+            }
+        }
+        private void AddInforme()
+        {
+            MainViewModel.GetInstance().Popups = new AddInformeViewModel(0, DateTime.Now, this.TiempoBinding, this.RevisitasBinding, 
+                this.FolletosBinding, this.LibrosBinding, this.TratadosBinding, this.VideosBinding, 
+                this.RevistasBinding, this.CursosBiblicosBinding);
+            var addInforme = new AddInformeView();
+            addInforme.CallbackEvent += (object sender, object e) => ListarRegistro();
+            addInforme.CancelCallbackEvent += (object sender, object e) => LimpiarCamposGuardar();
+            PopupNavigation.Instance.PushAsync(addInforme, true);
+        }
         #endregion
 
         #region Constructor
         public InformeViewModel()
         {
+            MiInforme = new MiInforme("00:00:00", 0, 0, 0, 0);
             ListarRegistro();            
         }
         #endregion

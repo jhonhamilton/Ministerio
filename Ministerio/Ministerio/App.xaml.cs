@@ -1,7 +1,5 @@
-﻿using Ministerio.Sqlite.Repositorio;
-using Ministerio.View;
+﻿using Ministerio.View;
 using Ministerio.ViewModel;
-using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,18 +13,14 @@ namespace Ministerio
         {
             InitializeComponent();
 
-            //InformeRepositorio.Inicializador(filename);
-            var mainViewModel = MainViewModel.GetInstance();
-            mainViewModel.InformeView = new InformeViewModel();
+            MainViewModel.GetInstance().InformeView = new InformeViewModel();
             MainPage = new MasterPage();
         }
 
         public App()
         {
             InitializeComponent();
-            
-            var mainViewModel = MainViewModel.GetInstance();
-            mainViewModel.InformeView = new InformeViewModel();
+            MainViewModel.GetInstance().InformeView = new InformeViewModel();
             MainPage = new MasterPage();
         }
 

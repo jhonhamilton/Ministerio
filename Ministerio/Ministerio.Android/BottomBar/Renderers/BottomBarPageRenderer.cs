@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-
+﻿using Android.Content;
 //using BottomBar.XamarinForms;
 //using BottomNavigationBar;
 //using BottomNavigationBar.Listeners;
@@ -15,10 +10,14 @@ using BottomNavigationBar;
 using BottomNavigationBar.Listeners;
 using Ministerio.BottomBar;
 using Ministerio.Droid.BottomBar.Utils;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms.Platform.Android.AppCompat;
-using Android.Content;
 //using BottomBar.Droid.Renderers;
 //using BottomBar.Droid.Utils;
 //using Ministerio.Droid.BottomBar.Utils;

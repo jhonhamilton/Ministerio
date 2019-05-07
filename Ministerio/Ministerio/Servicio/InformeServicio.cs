@@ -1,11 +1,7 @@
 ﻿using Ministerio.Interfaces;
-using Ministerio.Model;
 using Ministerio.Sqlite.Entidades;
 using Ministerio.Sqlite.Repositorio;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using Xamarin.Forms;
 
 namespace Ministerio.Servicio
@@ -29,10 +25,12 @@ namespace Ministerio.Servicio
         public void Modificar(Informe informe)
         {
             this.conext.UpdateInforme(informe);
+            DependencyService.Get<IMessage>().LongToast(this.conext.EstadoMensaje);
         }
         public void Eliminar(Informe informe)
         {
             this.conext.DeleteInforme(informe);
+            DependencyService.Get<IMessage>().LongToast(this.conext.EstadoMensaje);
         }
         public void DeleteAll()
         {

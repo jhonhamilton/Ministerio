@@ -2,11 +2,11 @@
 using Ministerio.Model;
 using Ministerio.Servicio;
 using Ministerio.Sqlite.Entidades;
-using System;
-using System.Collections.Generic;
+using Ministerio.Sqlite.Repositorio;
+using Ministerio.View.Popups;
+using Rg.Plugins.Popup.Services;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
@@ -101,6 +101,7 @@ namespace Ministerio.ViewModel
         public InformeAllViewModel()
         {
             informes = new InformeServicio().Consultar();
+            //informes = new InformeRepositorio().ObtenerTodosInformes();
             this.Meses =  Listar();
         }        
         private bool _IsRefreshing = false;
@@ -122,8 +123,9 @@ namespace Ministerio.ViewModel
             {
                 if (_SelectedMes != value)
                 {
-                    _SelectedMes = value;
-                    ExpandOrCollapseSelectedItem();
+                    //_SelectedMes = value;
+                    //ExpandOrCollapseSelectedItem();
+                    ShowDayToDay(value.Id);
                 }
             }
         }
@@ -149,9 +151,20 @@ namespace Ministerio.ViewModel
             }
         }
         private void RefreshData()
-        {            
+        {
+            MainViewModel.GetInstance().InformeView = null;
+            MainViewModel.GetInstance().InformeView = new InformeViewModel();
+            Meses = null;
             Meses = Listar();
-            DependencyService.Get<IMessage>().LongToast("Lista Actualizada");
+            DependencyService.Get<IMessage>().LongToast("Actualizada");            
+        }        
+        private void ShowDayToDay(int mes)
+        {
+            var dayToDay = new ObservableCollection<Informe>(informes.Where(i => i.Fecha.Month == mes).ToList().OrderByDescending(i => i.Fecha));
+            MainViewModel.GetInstance().ShowDayToDay = new ShowDayToDayViewModel(dayToDay);
+            var showDayView = new ShowDayToDayView();
+            showDayView.CallbackEvent += (object sender, object e) => RefreshData();
+            PopupNavigation.Instance.PushAsync(showDayView, true);
         }
         public void OnPropertyChanged([CallerMemberName]string NombrePropiedad = "")
         {

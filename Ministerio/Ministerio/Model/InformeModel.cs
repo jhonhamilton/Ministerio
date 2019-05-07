@@ -1,10 +1,7 @@
 ﻿using Ministerio.Servicio;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace Ministerio.Model
 {
@@ -186,7 +183,6 @@ namespace Ministerio.Model
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(NombrePropiedad));
         }
-        InformeServicio servicio = new InformeServicio();
         public InformeModel()
         {
             //Informes = new ObservableCollection<InformeModel>();

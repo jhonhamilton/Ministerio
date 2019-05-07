@@ -1,11 +1,7 @@
-﻿using System;
-using System.IO;
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
+using Android.Runtime;
 
 namespace Ministerio.Droid
 {
@@ -32,6 +28,14 @@ namespace Ministerio.Droid
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
+        public override void OnBackPressed()
+        {
+            if (Rg.Plugins.Popup.Popup.SendBackPressed(base.OnBackPressed))
+            {
+                Rg.Plugins.Popup.Services.PopupNavigation.Instance.PopAllAsync();
+            }
         }
     }
 }

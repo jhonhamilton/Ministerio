@@ -12,9 +12,21 @@ namespace Ministerio.iOS
         public string DataBasePath(string dbName)
         {
             string personalFolder = System.Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            string libraryFolder = System.IO.Path.Combine(personalFolder, "..", "Library");
+            //string libraryFolder = System.IO.Path.Combine(personalFolder, "..", "Library");
+            string libraryFolder = System.IO.Path.Combine(
+                PCLStorage.FileSystem.Current.LocalStorage.Path, 
+                "..", 
+                "Library");
             var path = System.IO.Path.Combine(libraryFolder, dbName);
             return path;
+        }
+
+        public SQLiteConnection DbConnection(string dbName)
+        {
+            string personalFolder = System.Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            string libraryFolder = System.IO.Path.Combine(personalFolder, "..", "Library");
+            var path = System.IO.Path.Combine(libraryFolder, dbName);
+            return new SQLite.SQLiteConnection(path);
         }
 
         //private string directorioDB;
@@ -43,12 +55,5 @@ namespace Ministerio.iOS
         //        return platform;
         //    }
         //}
-        public SQLiteConnection DbConnection(string dbName)
-        {
-            string personalFolder = System.Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            string libraryFolder = System.IO.Path.Combine(personalFolder, "..", "Library");
-            var path = System.IO.Path.Combine(libraryFolder, dbName);
-            return new SQLite.SQLiteConnection(path);
-        }
     }
 }

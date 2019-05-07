@@ -1,6 +1,4 @@
-﻿using Ministerio.Model;
-using Ministerio.ViewModel;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Ministerio.View.Paginas
@@ -11,6 +9,6 @@ namespace Ministerio.View.Paginas
         public InformeAllPage ()
 		{
 			InitializeComponent ();
-		}        
+		}
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ministerio.Interfaces
+﻿namespace Ministerio.Interfaces
 {
     public interface IMessage
     {

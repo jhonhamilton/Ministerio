@@ -3224,6 +3224,8 @@ namespace Ministerio.Droid
 			global::BottomNavigationBar.Resource.Styleable.ViewStubCompat_android_id = global::Ministerio.Droid.Resource.Styleable.ViewStubCompat_android_id;
 			global::BottomNavigationBar.Resource.Styleable.ViewStubCompat_android_inflatedId = global::Ministerio.Droid.Resource.Styleable.ViewStubCompat_android_inflatedId;
 			global::BottomNavigationBar.Resource.Styleable.ViewStubCompat_android_layout = global::Ministerio.Droid.Resource.Styleable.ViewStubCompat_android_layout;
+			global::PCLStorage.Resource.String.ApplicationName = global::Ministerio.Droid.Resource.String.ApplicationName;
+			global::PCLStorage.Resource.String.Hello = global::Ministerio.Droid.Resource.String.Hello;
 			global::Refractored.Fab.Resource.Attribute.fab_colorDisabled = global::Ministerio.Droid.Resource.Attribute.fab_colorDisabled;
 			global::Refractored.Fab.Resource.Attribute.fab_colorNormal = global::Ministerio.Droid.Resource.Attribute.fab_colorNormal;
 			global::Refractored.Fab.Resource.Attribute.fab_colorPressed = global::Ministerio.Droid.Resource.Attribute.fab_colorPressed;

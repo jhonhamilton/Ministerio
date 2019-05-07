@@ -1,9 +1,8 @@
 ﻿using Ministerio.Sqlite.Entidades;
 using SQLite;
+//using SQLite.Net;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
 using Xamarin.Forms;
 

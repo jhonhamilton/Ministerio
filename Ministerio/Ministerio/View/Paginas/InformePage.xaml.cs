@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using Ministerio.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,6 +10,11 @@ namespace Ministerio.View.Paginas
         public InformePage()
         {
             InitializeComponent();
+        }
+        protected override void OnDisappearing()
+        {
+            MainViewModel.GetInstance().InformeView = new InformeViewModel();
+            this.InitializeComponent();
         }
     }
 }

@@ -91,7 +91,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Config.cs" />
-    <Compile Include="FileAccess.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Renderers\ExtendedViewCellRenderer.cs" />
@@ -151,6 +150,9 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="PCLStorage">
+      <Version>1.0.2</Version>
+    </PackageReference>
     <PackageReference Include="Refractored.FloatingActionButtonForms">
       <Version>2.1.0</Version>
     </PackageReference>

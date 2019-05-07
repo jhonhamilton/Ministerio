@@ -1,9 +1,5 @@
 ﻿using BottomBar.XamarinForms;
 using Ministerio.View.Paginas;
-using Ministerio.ViewModel;
-using Xamarin.Forms;
-using Xamarin.Forms.PlatformConfiguration;
-using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using Xamarin.Forms.Xaml;
 
 namespace Ministerio.View
@@ -15,7 +11,6 @@ namespace Ministerio.View
         {
             InitializeComponent();
         }
-        
         protected override void OnCurrentPageChanged()
         {            
             base.OnCurrentPageChanged();
@@ -23,10 +18,32 @@ namespace Ministerio.View
             {
                 Title = "Informes";
             }
-            else
+            else if(CurrentPage is InformePage)
             {
                 Title = "Inicio";
             }
+            else
+            {
+                Title = "Inicio";
+            }            
         }
+        protected override bool OnBackButtonPressed()
+        {
+            if (CurrentPage is InformePage)
+            {
+                return base.OnBackButtonPressed();
+            }
+            else
+            {
+                return Regresar();
+            }
+        }
+        private bool Regresar()
+        {
+            var masterPage = this;
+            masterPage.CurrentPage = masterPage.Children[0];
+            masterPage.CurrentPage.Focus();
+            return true;
+        }        
     }
 }
